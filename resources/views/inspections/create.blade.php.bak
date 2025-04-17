@@ -1,0 +1,27 @@
+@extends('layouts.app')
+
+@section('content')
+<h2>Start New Inspection</h2>
+
+<form method="POST" action="{{ route('inspection.store') }}">
+    @csrf
+    <label>Client ID</label>
+    <input type="text" name="client_id" required><br><br>
+
+    <label>Property Address</label>
+    <input type="text" name="property_address" required><br><br>
+
+    <label>Inspection Date</label>
+    <input type="date" name="inspection_date" required><br><br>
+
+    <label>Load Template</label>
+    <select name="template_id">
+        <option value="">-- Optional --</option>
+        @foreach ($templates as $template)
+            <option value="{{ $template->id }}">{{ $template->name }}</option>
+        @endforeach
+    </select><br><br>
+
+    <button type="submit">Create Inspection</button>
+</form>
+@endsection

@@ -1,0 +1,1 @@
+<!-- Inspection backend editor Blade view -->

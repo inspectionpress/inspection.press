@@ -1,0 +1,36 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h2>Inspection Report</h2>
+
+    <p><strong>Property:</strong> {{ $inspection->property_address }}</p>
+    <p><strong>Date:</strong> {{ $inspection->inspection_date }}</p>
+
+    <a href="{{ url('/client/inspection/' . $inspection->id . '/pdf') }}" target="_blank">Download PDF</a>
+
+    <hr>
+
+    @foreach ($inspection->sections as $section)
+        <div style="margin-bottom: 20px;">
+            <h4>{{ $section->title }}</h4>
+            <p>{{ $section->description }}</p>
+
+            <ul>
+                @foreach ($section->findings as $finding)
+                    <li>
+                        <strong>{{ $finding->title }}</strong><br>
+                        {{ $finding->description }}<br>
+                        @if ($finding->recommendation)
+                            <em>Recommendation: {{ $finding->recommendation }}</em><br>
+                        @endif
+                        @if ($finding->image_path)
+                            <img src="{{ asset('storage/' . $finding->image_path) }}" alt="Image" style="max-width: 300px;">
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endforeach
+</div>
+@endsection

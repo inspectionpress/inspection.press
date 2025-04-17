@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inspection App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: sans-serif; margin: 0; }
+        nav { background: #333; color: #fff; padding: 1rem; }
+        nav a { color: white; margin-right: 15px; text-decoration: none; }
+        .container { padding: 2rem; }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/admin">Dashboard</a>
+    <a href="/admin/users">Users</a>
+    <a href="/admin/templates">Templates</a>
+    <a href="/admin/bookings">Bookings</a>
+    <a href="/admin/services">Services</a>
+    <a href="/admin/settings">Settings</a>
+</nav>
+<div class="container">
+    @yield('content')
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+This .tar contains final modules: Template Builder UI, Client Portal, Agreements, PDF Generator, Payment Settings, Admin Dashboard, and updated inspections/create page.

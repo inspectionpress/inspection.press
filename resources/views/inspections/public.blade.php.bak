@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inspection Report</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<h1>Inspection Report</h1>
+	<p><strong>Property:</strong> {{ $inspection->property_address }}</p>
+	<p><strong>Date:</strong> {{ $inspection->inspection_date }}</p>
+
+	@foreach ($inspection->sections as $section)
+		<h2>{{ $section->title }}</h2>
+		<p>{{ $section->description }}</p>
+
+		@foreach ($section->findings as $finding)
+			<div style="margin-left: 20px;">
+				<h4>{{ $finding->title }}</h4>
+				<p>{{ $finding->description }}</p>
+				@if($finding->recommendation)
+					<p><strong>Recommendation:</strong> {{ $finding->recommendation }}</p>
+				@endif
+			</div>
+		@endforeach
+	@endforeach
+</body>
+</html>

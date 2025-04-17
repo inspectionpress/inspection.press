@@ -1,0 +1,1 @@
+<h2>Thank you!</h2><p>Your booking request has been received. We'll contact you shortly to confirm.</p>

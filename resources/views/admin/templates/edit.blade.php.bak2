@@ -1,0 +1,116 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <ul id="section-list">
+    <h2>Edit Template: {{ $template->name }}</h2>
+
+    <h3>Add Section</h3>
+    <form method="POST" action="{{ route('admin.templates.sections.store', $template) }}">
+        @csrf
+        <input type="text" name="title" placeholder="Section Title" required>
+        <textarea name="description" placeholder="Section Description"></textarea>
+        <button type="submit">Add Section</button>
+    </form>
+
+    <hr>
+    @foreach ($template->sections as $section)
+        <div>
+            <form method="POST" action="{{ route('admin.templates.sections.update', $section) }}">
+                @csrf
+                @method('PATCH')
+                <input type="text" name="title" value="{{ $section->title }}" required>
+                <textarea name="description">{{ $section->description }}</textarea>
+                <button type="submit">Save Section</button>
+            </form>
+
+            <form method="POST" action="{{ route('admin.templates.sections.destroy', $section) }}" style="display:inline-block;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" onclick="return confirm('Delete this section?')">Delete Section</button>
+            </form>
+
+            <h5>Add Finding</h5>
+            <form method="POST" action="{{ route('admin.templates.findings.store', $section) }}">
+                @csrf
+                <input type="text" name="title" placeholder="Finding Title" required>
+                <textarea name="description" placeholder="Finding Description"></textarea>
+                <input type="text" name="recommendation" placeholder="Recommendation">
+                <button type="submit">Add Finding</button>
+            </form>
+
+            <ul>
+                @foreach ($section->findings as $finding)
+                    <li>
+                        <form method="POST" action="{{ route('admin.templates.findings.update', $finding) }}">
+                            @csrf
+                            @method('PATCH')
+                            <input type="text" name="title" value="{{ $finding->title }}" required>
+                            <textarea name="description">{{ $finding->description }}</textarea>
+                            <input type="text" name="recommendation" value="{{ $finding->recommendation }}">
+                            <button type="submit">Update</button>
+                        </form>
+
+                        <form method="POST" action="{{ route('admin.templates.findings.destroy', $finding) }}" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Delete this finding?')">Delete</button>
+                        </form>
+                    </li>
+                @endforeach
+    </ul>
+            </ul>
+        </div>
+        <hr>
+    @endforeach
+    </ul>
+</div>
+@endsection
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sectionList = document.getElementById('section-list');
+    const findingLists = document.querySelectorAll('[data-findings-list]');
+
+    if (sectionList) {
+        new Sortable(sectionList, {
+            animation: 150,
+            onEnd: function (evt) {
+                const order = Array.from(sectionList.children).map((el, i) => ({
+                    id: el.dataset.id,
+                    order: i
+                }));
+                fetch('/admin/templates/update-section-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ order })
+                });
+            }
+        });
+    }
+
+    findingLists.forEach((list) => {
+        new Sortable(list, {
+            animation: 150,
+            onEnd: function (evt) {
+                const order = Array.from(list.children).map((el, i) => ({
+                    id: el.dataset.id,
+                    order: i
+                }));
+                fetch('/admin/templates/update-finding-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ order })
+                });
+            }
+        });
+    });
+});
+</script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Schedule Inspection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>body { font-family: sans-serif; padding: 20px; }</style>
+</head>
+<body>
+<h2>Schedule an Inspection</h2>
+<form method="POST" action="{{ route('booking.store') }}">
+    @csrf
+    <input type="text" name="name" placeholder="Your Name" required><br><br>
+    <input type="email" name="email" placeholder="Email Address" required><br><br>
+    <input type="text" name="phone" placeholder="Phone Number" required><br><br>
+    <input type="text" name="address" placeholder="Property Address" required><br><br>
+
+    <label>Select Services:</label><br>
+    @foreach ($services as $service)
+        <label>
+            <input type="checkbox" name="service_ids[]" value="{{ $service->id }}"> {{ $service->name }}
+        </label><br>
+    @endforeach
+
+    <br>
+    <label>Preferred Time:</label><br>
+    <input type="datetime-local" name="scheduled_at" required><br><br>
+
+    <button type="submit">Continue to Payment</button>
+</form>
+</body>
+</html>

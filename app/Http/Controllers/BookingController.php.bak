@@ -1,0 +1,52 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Booking;
+use App\Models\Company;
+use App\Models\Service;
+
+class BookingController extends Controller
+{
+    public function form()
+    {
+        $company = Company::first(); // This will be dynamic per install/user
+        $services = Service::where('company_id', $company->id)->get();
+        return view('scheduler.form', compact('company', 'services'));
+    }
+
+    public function store(Request $request)
+    {
+        $company = Company::first();
+
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required|string',
+            'service_ids' => 'required|array',
+            'scheduled_at' => 'required|date',
+        ]);
+
+        $booking = Booking::create([
+            'company_id' => $company->id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'scheduled_at' => $request->scheduled_at,
+            'status' => 'pending',
+            'property_data' => '{}', // to be filled with Zillow/BuildFax
+        ]);
+
+        $booking->services()->sync($request->service_ids);
+
+        // Placeholder: generate Square link here
+        return redirect()->route('booking.success');
+    }
+
+    public function success()
+    {
+        return view('scheduler.success');
+    }
+}

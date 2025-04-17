@@ -1,0 +1,43 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h2>Edit Template: {{ $template->name }}</h2>
+
+    <h3>Add Section</h3>
+    <form method="POST" action="{{ route('admin.templates.sections.store', $template) }}">
+        @csrf
+        <input type="text" name="title" placeholder="Section Title" required>
+        <textarea name="description" placeholder="Section Description"></textarea>
+        <button type="submit">Add Section</button>
+    </form>
+
+    <hr>
+    @foreach ($template->sections as $section)
+        <div>
+            <h4>{{ $section->title }}</h4>
+            <p>{{ $section->description }}</p>
+
+            <form method="POST" action="{{ route('admin.templates.findings.store', $section) }}">
+                @csrf
+                <input type="text" name="title" placeholder="Finding Title" required>
+                <textarea name="description" placeholder="Finding Description"></textarea>
+                <input type="text" name="recommendation" placeholder="Recommendation">
+                <button type="submit">Add Finding</button>
+            </form>
+
+            <ul>
+                @foreach ($section->findings as $finding)
+                    <li>
+                        <strong>{{ $finding->title }}</strong>: {{ $finding->description }}
+                        @if ($finding->recommendation)
+                            <br><em>Recommendation: {{ $finding->recommendation }}</em>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        <hr>
+    @endforeach
+</div>
+@endsection

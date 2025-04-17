@@ -1,0 +1,1 @@
+<!-- PDF export Blade template for inspections -->

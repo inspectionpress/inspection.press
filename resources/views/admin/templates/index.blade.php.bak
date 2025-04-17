@@ -1,0 +1,15 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h2>Inspection Templates</h2>
+    <a href="{{ route('admin.templates.create') }}">Create New Template</a>
+    <ul>
+        @foreach ($templates as $template)
+            <li>
+                <a href="{{ route('admin.templates.edit', $template) }}">{{ $template->name }}</a>
+            </li>
+        @endforeach
+    </ul>
+</div>
+@endsection
