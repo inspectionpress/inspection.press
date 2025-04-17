@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\TemplateController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ServicesController;
+use App\Http\Controllers\Admin\DashboardController;
 
 // Homepage
 Route::get('/', function () {
@@ -92,3 +93,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/agents/create', [AgentController::class, 'create'])->name('agents.create');
     Route::post('/agents', [AgentController::class, 'store'])->name('agents.store');
 });
+
+// Dashboard
+
+Route::middleware(['auth','role:admin'])
+ ->prefix('admin')
+ ->name('admin.')
+ ->group(function () {
+     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+     Route::resource('clients', Admin\ClientController::class)->only(['index','create','store','edit','update','destroy']);
+     Route::resource('agents',  Admin\AgentController::class)->only(['index','create','store','edit','update','destroy']);
+     Route::resource('templates',Admin\TemplateController::class);
+     Route::resource('services', Admin\ServiceController::class);
+     Route::get('/settings', [Admin\SettingsController::class, 'edit'])->name('settings.edit');
+     Route::patch('/settings', [Admin\SettingsController::class, 'update'])->name('settings.update');
+ });
