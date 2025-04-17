@@ -1,66 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# InspectionPress
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full‐featured Laravel application for home inspection businesses: scheduling, report writing, CRM, payments, PDF exports, Bland.ai integration, CSV import/export, and more, all with a modern responsive UI.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🔍 Project Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+InspectionPress lets you:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 📅 **Schedule appointments** (client‐self‐service & admin side)  
+- 🏠 **Lookup property data** via Zillow & BuildFax  
+- 💳 **Accept payments** (Square & Stripe) with agent‑based invoicing logic  
+- 🗂️ **Manage a CRM** for clients and real estate agents  
+- ✍️ **Write inspection reports** with drag‑drop templates, narrative library, image support, and color‑coded severity  
+- 📄 **Generate PDFs** (standard reports + Florida Four‑Point & Wind Mitigation forms)  
+- 📑 **Import/export** narrative libraries via CSV  
+- 📞 **Automate calls & SMS** via Bland.ai (reminders, follow‑ups)  
+- 🔐 **Client portal** for secure, GUID‑based report access & agreement signing  
+- ⚙️ **Admin panel** for roles, services, pricing rules, API keys, storage settings, and theming  
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📋 Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Scheduler**  
+   - Inspector time‑slot management  
+   - Client self‑scheduling via embedded iframe  
+   - Price calculated by service + distance + square footage + age  
+   - Square (default) & Stripe payment integration  
+   - Invoice‑only mode for certain agents  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. **CRM**  
+   - Searchable clients & agents lists  
+   - Inline “add new” forms on booking  
+   - Role‑based access (admin, inspector, agent, client)  
 
-## Laravel Sponsors
+3. **Report Writer**  
+   - Drag/drop sections & findings  
+   - Import narrative library from CSV with field mapping  
+   - Rich‑text editing & image attachments  
+   - Color‑coded severity levels (admin configurable)  
+   - Public GUID‑based shareable link & PDF export  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+4. **Insurance Forms (FL‑specific)**  
+   - Auto‑fillable Four‑Point & Wind Mitigation PDFs  
+   - Inspector signature & flattening for compliance  
 
-### Premium Partners
+5. **Bland.ai Integration**  
+   - Configurable call & SMS scripts  
+   - Automated reminders & follow‑ups  
+   - Call/text event logging in CRM  
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+6. **File Storage**  
+   - Local, Amazon S3, Google Drive, OneDrive support  
+   - Admin‑configurable storage driver  
 
-## Contributing
+7. **Admin Panel**  
+   - Manage users, roles, services, pricing rules  
+   - Edit email templates & inspection agreements  
+   - View audit logs & communications history  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🚀 Quick Start
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Prerequisites
 
-## Security Vulnerabilities
+- PHP 8.1+  
+- Composer  
+- Node.js & npm  
+- MySQL (or MariaDB)  
+- Redis (optional, for queues)  
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. Clone & Install
 
-## License
+```bash
+git clone https://github.com/your‑username/inspection.press.git
+cd inspection.press
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+composer install
+npm install
+
+3. Environment Setup
+Copy the example env file and generate your app key:
+
+bash
+Copy
+Edit
+cp .env.example .env
+php artisan key:generate
+Edit .env to configure:
+
+DB_* (database credentials)
+
+FILESYSTEM_DRIVER (e.g. local or s3)
+
+SQUARE_* or STRIPE_* API keys
+
+BLAND_API_KEY
+
+Mail & other integrations
+
+4. Migrate & Seed
+bash
+Copy
+Edit
+php artisan migrate --seed
+5. Build Assets
+bash
+
+npm run build
+6. Run the App
+bash
+
+php artisan serve
+Visit http://localhost:8000 and log in with your seeded admin account:
+
+pgsql
+
+Email: admin@example.com  
+Password: password
+⚙️ Configuration & Maintenance
+Add/Edit Services & Pricing: Admin → Services
+
+Manage Users & Roles: Admin → Users
+
+Template & CSV Import: Admin → Templates
+
+Scheduler Settings: Admin → Scheduling
+
+Bland.ai & Integrations: Admin → Settings
+
+Storage Driver: .env or Admin → Storage Settings
+
+🧪 Testing
+Run PHPUnit tests:
+
+bash
+
+php artisan test
+Run ESLint & StyleLint (if configured):
+
+bash
+Copy
+Edit
+npm run lint
+🤝 Contributing
+We welcome improvements, bug fixes, and new features! Please:
+
+Fork the repo
+
+Create a feature/your‑feature branch
+
+Commit your changes with clear messages
+
+Open a Pull Request against main
+
+📄 License
+This project is released under the MIT License. See LICENSE for details.
+
+Thank you for choosing InspectionPress — the ultimate toolkit for modern home inspection businesses!
