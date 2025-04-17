@@ -1,6 +1,6 @@
 # InspectionPress
 
-A full‐featured Laravel application for home inspection businesses: scheduling, report writing, CRM, payments, PDF exports, Bland.ai integration, CSV import/export, and more, all with a modern responsive UI.
+A full‐featured Laravel application for home inspection businesses: scheduling, report writing, CRM, payments, PDF exports, Bland.ai integration, CSV import/export, and more, all with a modern responsive UI. Unlimited locations. Unlimited employees. Unlimited payments. Inspection.press is the free, scalable, open-source home inspection software the industry desperately needs. 
 
 ---
 
@@ -33,14 +33,16 @@ InspectionPress lets you:
 2. **CRM**  
    - Searchable clients & agents lists  
    - Inline “add new” forms on booking  
-   - Role‑based access (admin, inspector, agent, client)  
+   - Role‑based access (admin, inspector, agent, client)
+   - Initiate calls from customer card and read history
 
 3. **Report Writer**  
    - Drag/drop sections & findings  
    - Import narrative library from CSV with field mapping  
    - Rich‑text editing & image attachments  
    - Color‑coded severity levels (admin configurable)  
-   - Public GUID‑based shareable link & PDF export  
+   - Public GUID‑based shareable link & PDF export
+   - Built-in ChatGPT
 
 4. **Insurance Forms (FL‑specific)**  
    - Auto‑fillable Four‑Point & Wind Mitigation PDFs  
@@ -74,7 +76,6 @@ InspectionPress lets you:
 
 ### 2. Clone & Install
 
-```bash
 git clone https://github.com/your‑username/inspection.press.git
 cd inspection.press
 
@@ -84,9 +85,6 @@ npm install
 3. Environment Setup
 Copy the example env file and generate your app key:
 
-bash
-Copy
-Edit
 cp .env.example .env
 php artisan key:generate
 Edit .env to configure:
@@ -102,16 +100,12 @@ BLAND_API_KEY
 Mail & other integrations
 
 4. Migrate & Seed
-bash
-Copy
-Edit
+
 php artisan migrate --seed
 5. Build Assets
-bash
 
 npm run build
 6. Run the App
-bash
 
 php artisan serve
 Visit http://localhost:8000 and log in with your seeded admin account:
@@ -136,14 +130,9 @@ Storage Driver: .env or Admin → Storage Settings
 🧪 Testing
 Run PHPUnit tests:
 
-bash
-
 php artisan test
 Run ESLint & StyleLint (if configured):
 
-bash
-Copy
-Edit
 npm run lint
 🤝 Contributing
 We welcome improvements, bug fixes, and new features! Please:
@@ -158,5 +147,7 @@ Open a Pull Request against main
 
 📄 License
 This project is released under the MIT License. See LICENSE for details.
+
+No support is provided. 
 
 Thank you for choosing InspectionPress — the ultimate toolkit for modern home inspection businesses!
