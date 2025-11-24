@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <sub>Unlimited inspectors · Unlimited inspections · Unlimited templates & report types · PWA · Twilio · SES · S3 · Outlook/Graph · BuildFax · RentCast</sub>
+  <sub>Unlimited inspectors · Unlimited inspections · Unlimited templates &amp; report types · PWA · Twilio · SES · S3 · Outlook/Graph · BuildFax · RentCast</sub>
 </p>
 
 ---
@@ -27,8 +27,8 @@ It brings together:
 - Report writer & template builder with AI
 - Equipment & asset tracking
 - Document uploads & automatic permit attachment
-- Email/SMS/phone automations
 - Time-stamped internal office notes
+- Email/SMS/phone automations
 - PWA with offline support
 - Google Maps & Apple Maps integration
 
@@ -132,7 +132,7 @@ A flexible pricing engine that supports real-world scenarios:
   - Contact info, tags, custom fields
   - Property history
   - Inspection history
-  - Internal notes (time-stamped office notes where needed)
+  - Internal notes (time-stamped where needed)
 - Bulk client import from CSV/XLS(X)
 
 ### 🧑‍💼 Agents & Agencies
@@ -501,126 +501,67 @@ InspectionPress ships as a **Progressive Web App**:
 - npm or yarn
 - Composer **2+**
 
-### Background Tasks (Cron or systemd)
+### Background Tasks
 
-InspectionPress supports both classic **cron** and **systemd** for running the Laravel scheduler.
+InspectionPress relies on the standard Laravel scheduler and queue system for:
 
-**Option 1 – Cron (traditional):**
+- Email sending
+- PDF generation
+- Imports & bulk jobs
+- External API integrations
+- Time-based automations
 
-```bash
-* * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
-Option 2 – systemd timer (recommended on modern Ubuntu):
+You can run the scheduler using either cron **or** systemd timers, following the official Laravel documentation or your preferred process manager. Queue workers should be supervised (e.g. via systemd, Supervisor, or another process manager) to keep `queue:work` processes running.
 
-Create a service unit (e.g. /etc/systemd/system/inspectionpress-schedule.service):
+### Storage & External Services
 
-ini
-Copy code
-[Unit]
-Description=InspectionPress schedule runner
+- Amazon S3 bucket for uploads & reports
+- Amazon SES for email
+- (Optional) Cloudflare in front of app and/or S3
+- Microsoft Graph app registration for Outlook calendar/email
+- Twilio account for calls/SMS
+- BuildFax, RentCast, and Weather API credentials (where used)
+- Google Maps API key and Apple Maps deep-link configuration (where used)
 
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/php /path/to/artisan schedule:run
-WorkingDirectory=/path/to/project
-User=www-data
-Group=www-data
-Create a timer unit (e.g. /etc/systemd/system/inspectionpress-schedule.timer):
+### Client Devices
 
-ini
-Copy code
-[Unit]
-Description=Run InspectionPress schedule every minute
+- Modern browser (Chrome, Edge, Firefox, Safari – latest versions)
+- Android 10+ / iOS 15+ for best PWA support
+- Camera & microphone for:
+  - On-site media capture
+  - Browser-based calling (if enabled)
 
-[Timer]
-OnBootSec=1min
-OnUnitActiveSec=1min
-Unit=inspectionpress-schedule.service
+---
 
-[Install]
-WantedBy=timers.target
-Then enable & start:
+## 📜 Licensing
 
-bash
-Copy code
-sudo systemctl enable --now inspectionpress-schedule.timer
-Either cron or systemd is supported; pick whichever fits your environment.
-
-You will also want one or more queue workers for:
-
-Email sending
-
-PDF generation
-
-Imports & bulk jobs
-
-External API integrations
-
-(e.g. managed via supervisord or systemd services running php artisan queue:work.)
-
-Storage & External Services
-Amazon S3 bucket for uploads & reports
-
-Amazon SES for email
-
-(Optional) Cloudflare in front of app and/or S3
-
-Microsoft Graph app registration for Outlook calendar/email
-
-Twilio account for calls/SMS
-
-BuildFax, RentCast, and Weather API credentials (where used)
-
-Google Maps API key and Apple Maps deep-link configuration (where used)
-
-Client Devices
-Modern browser (Chrome, Edge, Firefox, Safari – latest versions)
-
-Android 10+ / iOS 15+ for best PWA support
-
-Camera & microphone for:
-
-On-site media capture
-
-Browser-based calling (if enabled)
-
-📜 Licensing
-InspectionPress is released under the GNU General Public License (GPL).
+InspectionPress is released under the **GNU General Public License (GPL)**.
 
 You may:
 
-Use it for commercial or non-commercial inspection businesses
-
-Study and modify the source code
-
-Redistribute modifications under GPL terms
+- Use it for commercial or non-commercial inspection businesses
+- Study and modify the source code
+- Redistribute modifications under GPL terms
 
 It’s suitable for:
 
-Solo inspectors & small teams
+- Solo inspectors & small teams
+- Multi-inspector firms & franchises
+- Municipal / code enforcement departments
+- Insurance specialists
+- White-label and multi-tenant deployments (within GPL requirements)
 
-Multi-inspector firms & franchises
+---
 
-Municipal / code enforcement departments
+## 💡 Why InspectionPress?
 
-Insurance specialists
-
-White-label and multi-tenant deployments (within GPL requirements)
-
-💡 Why InspectionPress?
-Florida-first: Four-Point and Wind Mitigation workflows are first-class, not bolted on.
-
-Unlimited everything: Inspectors, inspections, templates, services, areas, zones.
-
-AI-powered: Report writer and template builder make narrative work faster and cleaner.
-
-Full CRM: Clients, agents, agencies, and contractors with calls, SMS and automations.
-
-Equipment tracker: Know where every tool, drone, computer, and printer is—and who has it.
-
-PWA-ready: Field-friendly, offline-capable, and installable on mobile & desktop.
-
-Maps and data-rich: Google Maps, Apple Maps, BuildFax, RentCast, and weather data baked in.
-
-Self-hosted & GPL: You own the stack and control your data—no per-inspection pricing, no lock-in.
+- **Florida-first**: Four-Point and Wind Mitigation workflows are first-class, not bolted on.
+- **Unlimited everything**: Inspectors, inspections, templates, services, areas, zones.
+- **AI-powered**: Report writer and template builder make narrative work faster and cleaner.
+- **Full CRM**: Clients, agents, agencies, and contractors with calls, SMS and automations.
+- **Equipment tracker**: Know where every tool, drone, computer, and printer is—and who has it.
+- **PWA-ready**: Field-friendly, offline-capable, and installable on mobile & desktop.
+- **Maps and data-rich**: Google Maps, Apple Maps, BuildFax, RentCast, and weather data baked in.
+- **Self-hosted & GPL**: You own the stack and control your data—no per-inspection pricing, no lock-in.
 
 Use InspectionPress as the operational core of your inspection company, white-label it for partners, or evolve it into your own SaaS platform. It’s built to grow with you.
