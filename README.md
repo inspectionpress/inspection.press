@@ -28,6 +28,7 @@ It brings together:
 - Equipment & asset tracking
 - Document uploads & automatic permit attachment
 - Email/SMS/phone automations
+- Time-stamped internal office notes
 - PWA with offline support
 - Google Maps & Apple Maps integration
 
@@ -41,7 +42,7 @@ It brings together:
 
 | Layer        | Tech / Service                                                                 |
 | ------------ | ------------------------------------------------------------------------------ |
-| OS           | Ubuntu Server 20.04+ (22.04+ recommended)                                     |
+| OS           | Ubuntu Server 20.04+ (22.04+ recommended)                                      |
 | Web server   | Nginx                                                                          |
 | Runtime      | PHP 8.1+ (8.2+ recommended)                                                    |
 | DB           | MariaDB 10.5+ (or MySQL 8+ compatible)                                         |
@@ -70,7 +71,7 @@ It brings together:
   - Logos, report headers/footers, email signatures and styling
 - Time-stamped **office notes**:
   - Internal notes on inspections, clients, or agents
-  - Each entry time-stamped for audit/history
+  - Each entry time-stamped for history and accountability
 
 ### 📦 Services, Service Areas & Zones
 
@@ -314,7 +315,7 @@ Keep track of every piece of gear your company owns:
   - To specific sections
   - To individual findings
 - Automatically attach permit records:
-  - Pull BuildFax permit data and attach to relevant report sections
+  - Pull BuildFax permit data and attach it to relevant report sections
   - Keep permit evidence alongside narratives and photos
 - Centralize all supporting documentation for each inspection
 
@@ -500,13 +501,51 @@ InspectionPress ships as a **Progressive Web App**:
 - npm or yarn
 - Composer **2+**
 
-### Background Tasks
+### Background Tasks (Cron or systemd)
 
-- Cron entry for Laravel scheduler:
+InspectionPress supports both classic **cron** and **systemd** for running the Laravel scheduler.
 
-  ```bash
-  * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
-One or more queue workers for:
+**Option 1 – Cron (traditional):**
+
+```bash
+* * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+Option 2 – systemd timer (recommended on modern Ubuntu):
+
+Create a service unit (e.g. /etc/systemd/system/inspectionpress-schedule.service):
+
+ini
+Copy code
+[Unit]
+Description=InspectionPress schedule runner
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/php /path/to/artisan schedule:run
+WorkingDirectory=/path/to/project
+User=www-data
+Group=www-data
+Create a timer unit (e.g. /etc/systemd/system/inspectionpress-schedule.timer):
+
+ini
+Copy code
+[Unit]
+Description=Run InspectionPress schedule every minute
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Unit=inspectionpress-schedule.service
+
+[Install]
+WantedBy=timers.target
+Then enable & start:
+
+bash
+Copy code
+sudo systemctl enable --now inspectionpress-schedule.timer
+Either cron or systemd is supported; pick whichever fits your environment.
+
+You will also want one or more queue workers for:
 
 Email sending
 
@@ -515,6 +554,8 @@ PDF generation
 Imports & bulk jobs
 
 External API integrations
+
+(e.g. managed via supervisord or systemd services running php artisan queue:work.)
 
 Storage & External Services
 Amazon S3 bucket for uploads & reports
