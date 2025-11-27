@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <b>InspectionPress</b> · Florida-first, AI-powered inspection OS · Fully open source
+  <b>InspectionPress</b> · Florida-first, AI-powered inspection OS · Fully open source · Built from the ground up
 </p>
 
 <p align="center">
