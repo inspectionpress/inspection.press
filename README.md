@@ -7,23 +7,34 @@
 </p>
 
 <p align="center">
-  <sub>Self-hosted · PWA-ready · Multi-service · Inspection-focused · Built for real-world field workflows</sub>
+  <sub>Self-hosted · Production-used · Inspection-focused · PWA-friendly · Built for real-world field workflows</sub>
 </p>
 
 ---
 
 ## Why InspectionPress Exists
 
-InspectionPress was built out of frustration with software that charges per inspection, limits customization, makes specialty forms awkward, and forces companies to work inside somebody else’s box.
+InspectionPress was built out of frustration with software that charges per inspection, limits customization, handles specialty insurance forms poorly, and forces inspection companies to adapt their workflow to someone else’s platform.
 
-This project is aimed at teams that want to own their stack:
+This project is for teams that want to own their stack:
 
 - **Self-hosted** and under your control
 - **Open source** and intended to be extended
 - **Built for inspection operations**, not generic forms
-- **Focused on real field workflows** like scheduling, assignment, service-area logic, specialty forms, media-heavy reporting, and partner communication
+- **Focused on real field workflows** like scheduling, assignment, service-area logic, media-heavy reporting, specialty forms, CRM, and partner communication
 
-> **Status note:** InspectionPress is under active development. Some modules are already usable, some are in heavy iteration, and some roadmap items are planned but not finished yet. Expect rough edges, test thoroughly, and use the issue tracker for bugs and feature requests.
+---
+
+## Production Status
+
+InspectionPress is a **work in progress**, but it is also **working in production**.
+
+That means two things are true at the same time:
+
+- Real inspections are being scheduled, edited, documented, and delivered through the platform
+- The codebase is still evolving quickly, and some areas are under active refinement
+
+Expect rough edges, changing interfaces, and ongoing cleanup. Use the issue tracker for bugs, regressions, and feature requests.
 
 ---
 
@@ -37,7 +48,7 @@ InspectionPress is a full-stack field operations platform for inspection-based b
 - Roofers and roofing sales teams
 - Appraisers and adjusters
 - Contractors and specialty trades
-- Any field service business that needs structured forms, media capture, scheduling, PDFs, and CRM
+- Any field service business that needs structured forms, media capture, scheduling, PDFs, CRM, and operational records
 
 At a high level, InspectionPress combines:
 
@@ -45,85 +56,148 @@ At a high level, InspectionPress combines:
 - **CRM for customers, agents, and agencies**
 - **Dynamic service pricing and modifiers**
 - **Template-driven report writing**
-- **Specialty inspection form support**
+- **Specialty inspection form workflows**
 - **Photo, video, and document handling**
 - **PDF generation and public share links**
-- **Integrations for maps, property data, weather, email, phone, and storage**
+- **Operational integrations for maps, weather, messaging, storage, permits, and structural reference data**
 
 ---
 
-## Current Product Highlights
+## Current Production Highlights
 
-### Wind Mitigation 2026 Editor and PDF Output
+### Wind Mitigation 2026
 
-The **Wind Mitigation 2026** workflow is one of the biggest focal points of the project right now.
+The new **Wind Mitigation 2026** workflow is one of the most visible specialty modules in the system, but it is part of a larger reporting platform rather than the entire platform itself.
 
 Current work includes:
 
 - Dedicated **2026 wind mitigation editor**
-- Form-aware UI built specifically around the Florida OIR-B1-1802 workflow
-- Mapped fields, checkboxes, radio groups, and section-specific logic
-- SVG-driven editing for form fidelity
+- Form-aware UI built around the Florida **OIR-B1-1802** workflow
+- SVG-based editing for form fidelity
+- Mapped fields, radios, checkboxes, conditional logic, and section-specific controls
 - Mobile-focused editing improvements for field use
-- Sticky top navigation and section-focused workflow improvements
-- Per-section hints and reference tools
-- Photo capture, annotation, and section-level media handling
-- Carrier-style PDF rendering with form-specific output rules
-- Ongoing refinements to page rendering, filenames, image pagination, signatures, and specialty field mapping
+- Sticky section navigation and section-level helper tools
+- Specialty photo workflows tied directly to the form
+- Carrier-style PDF rendering and form-specific output handling
+- Ongoing refinements to field mapping, signatures, pagination, and specialty logic
 
-This is not treated as a generic template. It is being built as a **true specialty form workflow**.
+This is not treated as a generic template. It is being built as a true specialty-form workflow for real production use.
+
+### ASCE Integration
+
+**ASCE integration is live, working, and in production.**
+
+InspectionPress uses ASCE-related tooling to support real inspection workflows, especially in areas where standards-based structural or wind-related reference material improves field documentation.
+
+Current usage includes:
+
+- Pulling ASCE-related reference content into specialty workflows
+- Attaching ASCE-related images and supporting material where useful to the inspection record
+- Reducing manual lookup work during inspection and reporting
+- Supporting more defensible documentation in wind- and roof-related workflows
+
+This is an active part of the production system, not a future idea.
 
 ### Roof Slope Assistant
 
-InspectionPress now includes a **roof slope assistant** aimed at helping inspectors make faster and more consistent roof-form decisions.
+InspectionPress includes a **Roof Slope Assistant** designed to help inspectors make faster and more consistent roof-related decisions from actual imagery instead of relying only on manual estimation.
 
-Current and recent work around this tool includes:
+Current and recent work includes:
 
 - Visual roof-slope measurement assistance inside the editor
-- Level-assist behavior to improve interpretation of the image angle
-- Sampling tools that can drive the selected answer in the form
-- UI for working directly from captured imagery instead of manual guesswork alone
-- Tight coupling with roof-related inspection workflows and specialty forms
-- Ongoing refinement of capture behavior, thresholding, and form application logic
+- Level-assist behavior for interpreting image angle
+- Sample-based answer assistance tied back to the form workflow
+- UI for working from captured imagery directly in the report process
+- Continued refinement of capture behavior, thresholds, and form application logic
 
-The goal is to make the slope workflow more useful in the field, not just add a gimmicky overlay.
-
-### ASCE API Integration
-
-ASCE-related support is a major roadmap emphasis.
-
-Planned direction includes:
-
-- Pulling structural / wind-related reference data into inspection workflows where appropriate
-- Supporting better decision assistance for wind-related form completion and roof-related workflows
-- Reducing manual lookups when inspectors need standards-based context during reporting
-
-This area is still evolving, but it is important enough to call out prominently because it fits the broader goal of making specialty inspection workflows smarter and more defensible.
+The goal is practical field assistance, not just an overlay.
 
 ---
 
-## Current Features
+## Report Writer and Narrative Workflow
 
-The following areas are already present in the product in some form and are being actively improved.
+The report writer is the core of InspectionPress. It is built around a structured hierarchy and media-heavy documentation workflow.
 
-### Reporting and Form Workflows
+### Structured Report Editing
 
-- Template-based report writing
+- Template-driven report writing
 - Section → component → finding hierarchy
-- Rich-text editing for narratives
-- Findings with severity states such as Minor, Major, and Material / Safety Concern
-- Narrative library support
-- Summary views and filtered report views
+- Required and optional content support
+- Rich-text narrative editing
+- Severity-based findings such as **Minor**, **Major**, and **Material / Safety Concern**
+- Summary and filtered report views
 - Public UUID-based report access
-- PDF generation for report outputs
-- Specialty form support for:
-  - Wind mitigation
-  - Four-point inspections
-- Media support in reports:
-  - Photos
-  - Captions
-  - Annotation workflows
-  - Inline video support in key reporting flows
+- PDF generation for both standard reports and specialty forms
+
+### Narrative Library
+
+The **narrative library** is a major part of day-to-day usability.
+
+Current functionality and active workflow includes:
+
+- Centralized reusable narrative content
+- Fast insertion of prewritten narratives into findings
+- Consistent language across inspectors and report types
+- Support for reference content that goes beyond plain text
+- A foundation for building company-standard language, field guidance, and specialty inspection support content
+
+### Reference Photos and Visual Guidance
+
+InspectionPress is not limited to plain narratives. The platform is being shaped around visual reference content as well.
+
+Current and active workflows include:
+
+- **Reference photos** associated with narrative and specialty workflows
+- Section-level visual guidance where it helps inspectors make faster choices
+- Reusable image-backed content for training, reminders, and field consistency
+- Read-only reference modal patterns for in-form assistance
+
+### Rapid Fire Camera
+
+The **Rapid Fire Camera** workflow is designed for speed in the field.
+
+Current work includes:
+
+- Fast photo capture from within specialty editors
+- UI optimized for field use and repetitive capture workflows
+- Landscape/portrait handling improvements
+- Ongoing work around ergonomics, handedness, and quick capture behavior
+
+### Intervention, Flagging, and Recommended Actions
+
+InspectionPress is being built to do more than just store photos and text blocks.
+
+Active reporting workflow includes support for:
+
+- **Intervention** patterns where the system helps direct the inspector toward the next step in the workflow
+- **Flagging** findings or conditions that need attention, follow-up, or special emphasis
+- **Recommended actions** tied to findings and reporting output
+- Better structure around how concerns are surfaced in summary views and downstream communication
+
+### Attachments and Supporting Evidence
+
+InspectionPress is designed to keep supporting evidence close to the actual inspection record.
+
+Current and active workflows include:
+
+- Photo and video attachment at the report level
+- Permit attachment workflows
+- ASCE image attachment workflows
+- Document uploads tied to inspections and related records
+- Public and internal access patterns based on UUIDs and report context
+
+---
+
+## Current Platform Features
+
+The following areas are already present in the platform in some form and are being actively improved.
+
+### Specialty Inspection Workflows
+
+- Wind mitigation editor and PDF workflow
+- Four-point inspection support
+- Specialty inspection form mapping and form-aware editors
+- SVG-backed specialty workflows where fidelity matters
 
 ### Scheduling and Inspection Management
 
@@ -133,17 +207,18 @@ The following areas are already present in the product in some form and are bein
 - Unconfirmed inspection handling
 - Inspector assignment workflows
 - Availability-aware scheduling direction
-- Planned and active work around service-area and zone-based assignment
+- Service-area and zone-based assignment work
 
 ### Pricing and Services
 
 - Service catalog management
 - Service categories
 - Template-to-service linkage
-- Dynamic pricing logic based on factors like:
+- Dynamic pricing logic based on:
   - Square footage
   - Property age
   - Distance / mileage
+  - Service-specific modifiers
 - Add-on service support
 - Modifier UI work for inspection pricing behavior
 
@@ -154,40 +229,38 @@ The following areas are already present in the product in some form and are bein
 - Agency records
 - Import workflows for customers, agents, agencies, and templates
 - CRM-style detail views and edit pages
-- Internal notes and record history direction
-- Duplicate merge workflows for contacts
+- Duplicate merge workflows for contact cleanup
+- Notes, history, and operational record direction
 
-### Invoices, Documents, and Operational Records
+### Documents, PDFs, and Operational Records
 
-- Invoice module groundwork and active build-out
-- Inspection-linked and standalone invoice direction
+- UUID-based public access patterns
+- Report PDFs
+- Specialty-form PDFs
 - Document uploads tied to inspections
-- PDF storage / sharing workflows
-- Public document access patterns through UUID-style links
+- Public/private delivery workflows for report records
 
 ### Mapping, Property, and Weather
 
 - Google Maps / Places integration work
 - Address lookup and map-assisted workflows
-- BuildFax integration direction
-- RentCast integration direction
+- BuildFax integration
+- RentCast integration
 - Weather block support for inspection conditions and locked-at-inspection-time weather context
 
-### Admin, Roles, and Permissions
+### Roles, Permissions, and Branding
 
 - Admin panel for core modules
-- User / employee / inspector management direction
 - Roles and permissions support
-- GUI-based permissions matrix work
+- GUI-based permissions matrix direction
 - Branding settings for report headers, footers, and other company-facing output
 
 ### Communications and Telephony
 
-- Twilio integration direction for browser-based calling
-- Call buttons from CRM views
+- Twilio integration work for browser-based calling and related workflows
 - SMS / voice workflow direction
-- Outlook / Microsoft 365 integration plans for scheduling and communication
-- Automated email workflow direction for appointment and report events
+- Outlook / Microsoft 365 integration work for scheduling and communication
+- Automated email and notification workflow direction for inspection lifecycle events
 
 ### PWA and Mobile-Focused Work
 
@@ -198,203 +271,83 @@ The following areas are already present in the product in some form and are bein
 
 ---
 
-## Planned Features and Active Roadmap
+## Paid Services and Operating Costs
 
-InspectionPress is being built as a broad inspection operations platform, not just a single report editor. Major roadmap areas include:
+InspectionPress is open source, but a production deployment can still involve real third-party costs.
 
-### Specialty Inspection Expansion
+Depending on how you use it, you should expect costs for:
 
-- Continued hardening of **Wind Mitigation 2026**
-- Continued hardening of **Four Point** form workflows
-- Additional Florida and carrier-specific form support
-- More inspection-type-specific editors instead of forcing everything through one generic UI
+- **Server hosting / VPS / cloud infrastructure**
+- **BuildFax**
+- **RentCast**
+- **Amazon SES**
+- **Amazon SNS**
+- **Twilio**
+- **ASCE**
+- **Storage and CDN services** such as S3 and optionally Cloudflare
+- **Maps and geocoding services** depending on provider and usage
 
-### Smarter Inspection Assistance
-
-- Expanded **ASCE API** usage where it meaningfully supports inspection decisions
-- Better standards-aware workflows for wind and roof-related forms
-- Continued refinement of roof measurement and classification helpers
-- More field-side decision assistance tools that reduce repetitive manual lookup work
-
-### Full Operational Platform Features
-
-- More complete invoice and payment handling
-- Square and Stripe payment flows
-- Customer and partner portals
-- Agent-specific pricing and service visibility
-- Region-based pricing and inspector assignment
-- More automation around scheduling, reminders, confirmations, and delivery
-- Deeper inspection-to-CRM-to-invoice linking
-
-### Communication and Collaboration
-
-- More complete Twilio browser calling
-- End-call and call-state improvements across CRM views
-- Email templates and notification pipelines
-- Outlook / Microsoft 365 calendar integration
-- Additional transactional communication workflows
-
-### Data and Integrations
-
-- Continued BuildFax and RentCast improvements
-- More robust weather integration for inspection records
-- Better document ingestion and attachment workflows
-- S3-compatible storage options and cloud backup flexibility
-
-### UX and Platform Polish
-
-- More consistency across specialty modals and editor tools
-- Better tablet and mobile layouts
-- Cleaner admin UI throughout the platform
-- More reusable shared components for form editors and specialty tools
+Some deployments may choose not to enable every integration, but the platform is built with the expectation that many production teams will rely on paid external services on top of normal hosting costs.
 
 ---
 
-## Core Modules
+## Core Integrations
 
-### 1. Inspection Scheduler
+InspectionPress is designed to work with a mix of self-hosted application logic and paid external services.
 
-InspectionPress is being built to support real scheduling complexity, including:
+Current and active integration areas include:
 
-- Customer creation during scheduling
-- Agent / agency linking
-- Service-based booking flows
-- Property-aware pricing
-- Inspector assignment logic
-- Availability and duration-aware scheduling direction
-- Support for embedded scheduler experiences
-
-### 2. Report Writer
-
-The report writer is one of the central pieces of the platform.
-
-Goals and current direction include:
-
-- Fast narrative entry
-- Rich media support
-- Better mobile usability
-- Template-driven structure
-- Severity-based summary workflows
-- AI-assisted narrative refinement in the future
-- Specialty editors where a generic report builder is not enough
-
-### 3. CRM
-
-InspectionPress treats CRM as part of inspection operations, not a separate afterthought.
-
-Supported or planned records include:
-
-- Customers
-- Agents
-- Agencies
-- Inspectors / employees
-- Related communication and inspection history
-
-### 4. Services and Pricing
-
-Services are intended to be flexible enough for:
-
-- Standard home inspections
-- Insurance forms
-- Add-ons
-- Roof-only inspections
-- Trade-specific inspections
-- Agency-specific service offerings
-
-### 5. Forms and PDFs
-
-The system is designed to support:
-
-- General narrative inspection reports
-- Summary reports
-- Carrier-style specialty forms
-- Exact or near-exact PDF output requirements for real-world use cases
+- **Amazon S3** for storage
+- **Amazon SES** for email delivery
+- **Amazon SNS** for messaging-related workflows
+- **Twilio** for phone and SMS workflows
+- **BuildFax** for permit and property-related data
+- **RentCast** for property-related data
+- **ASCE** for structural / wind-related reference support
+- **Google Maps / Places** for address and mapping workflows
+- **Weather APIs** for inspection-condition capture
+- **Microsoft Graph / Outlook** for scheduling and communication workflows
 
 ---
 
-## Integrations
+## Self-Hosting and Deployment
 
-Current or planned integrations include:
+InspectionPress is intended to be self-hosted.
 
-- **Google Maps / Places** for address and map workflows
-- **BuildFax** for permit and property history direction
-- **RentCast** for property data direction
-- **Weather.gov / weather APIs** for inspection-time conditions
-- **Twilio** for browser calling, SMS, and communication workflows
-- **Outlook / Microsoft 365 / Graph** for calendar and email direction
-- **Square** for payments
-- **Stripe** for payments
-- **Amazon S3** and S3-compatible storage for files and PDFs
+Typical baseline requirements include:
 
----
+- Ubuntu Server **20.04+**
+- Nginx
+- PHP **8.1+**
+- MariaDB or MySQL
+- Node.js / npm
+- Composer
+- Queue workers and scheduler support following normal Laravel deployment practices
 
-## Tech Stack
+Production use will often also require:
 
-| Layer | Stack |
-| --- | --- |
-| Backend | Laravel / PHP |
-| Frontend | Blade, Alpine.js, Tailwind CSS, JavaScript |
-| Build tools | Vite, Node.js |
-| Database | MySQL / MariaDB |
-| Storage | Local and S3-compatible storage |
-| PDFs / forms | SVG- and template-driven rendering workflows |
-| Mobile strategy | PWA-first direction |
+- S3-compatible storage
+- Email service credentials
+- SMS/voice provider credentials
+- API credentials for property, permit, weather, mapping, and ASCE-related services
 
 ---
 
-## Who This Is For
+## Roadmap and Active Work
 
-InspectionPress is being built for companies that need more control than typical inspection SaaS platforms allow.
+InspectionPress is already usable, but there is still a large amount of active build-out happening.
 
-That includes teams doing:
+Key areas of current development include:
 
-- Home inspections
-- Wind mitigations
-- Four-point inspections
-- Roof inspections
-- Insurance inspections
-- Contractor field documentation
-- Specialty trade evaluations
-- Property condition reporting
-
-If your workflow involves field visits, photos, specialty forms, structured findings, scheduling, partner coordination, and PDF delivery, this project is likely relevant.
-
----
-
-## Development Philosophy
-
-A few themes keep driving this project:
-
-- **Own your stack** instead of renting critical workflow infrastructure
-- **Build for actual inspection use** instead of generic forms alone
-- **Support specialty forms properly** when they deserve custom workflows
-- **Favor field usability** on phones and tablets
-- **Keep the door open for automation and integrations**
-
-InspectionPress is opinionated in the sense that it is being built from real inspection workflow pain points, but flexible in the sense that the platform is meant to be extended.
-
----
-
-## Contributing and Feedback
-
-This project is a work in progress and feedback matters.
-
-Please use the issue tracker for:
-
-- Bugs
-- Workflow issues
-- Inspection-specific edge cases
-- Form fidelity problems
-- UI / UX suggestions
-- Feature requests
-
-Special attention is especially helpful on:
-
-- Wind Mitigation 2026 behavior and PDF fidelity
-- Roof slope assistant behavior and usability
-- Specialty form workflows
-- Tablet and mobile field use
-- Integration edge cases
+- Continued refinement of the Wind Mitigation 2026 workflow
+- Four-point editor and output improvements
+- Deeper narrative-library tooling
+- Better reference-photo workflows and reusable specialty modal patterns
+- More refinement to rapid-capture and media-heavy field workflows
+- Better summary, flagging, and recommended-action handling
+- Expanded scheduling, assignment, pricing, and invoicing workflows
+- More polished CRM, permissions, and operational views
+- More consistency across mobile, tablet, and desktop interfaces
 
 ---
 
@@ -402,23 +355,27 @@ Special attention is especially helpful on:
 
 InspectionPress is released under the **GNU General Public License (GPL)**.
 
-You may use it, study it, modify it, and redistribute it in accordance with the GPL.
+You may use, study, modify, and redistribute it in accordance with the GPL.
 
-**No warranty is provided.**
+**No Warranty**
 
-Use the software at your own risk. Verify all calculations, generated PDFs, workflow behavior, and regulatory or carrier-specific requirements before relying on it in production.
+This software is provided **as-is**, with **no warranty expressed or implied**, including any implied warranties of merchantability or fitness for a particular purpose. Use it at your own risk.
+
+You are responsible for:
+
+- Verifying correctness and suitability for your workflow
+- Complying with local laws, regulations, carrier requirements, and professional standards
+- Handling your own backups, security, and disaster recovery
 
 ---
 
 ## In Short
 
-InspectionPress is evolving into a full inspection operations platform with strong emphasis on:
+InspectionPress is:
 
-- **Wind Mitigation 2026**
-- **Four Point workflows**
-- **Roof slope assistance**
-- **Specialty-form PDF output**
-- **Scheduling, CRM, and pricing in one stack**
-- **Self-hosted, open, inspection-first architecture**
+- A self-hosted inspection operations platform
+- Already working in production while still under active development
+- Built for structured field reporting, specialty forms, CRM, scheduling, and media-heavy workflows
+- Focused on practical inspection work rather than generic form software
 
-If you want an inspection platform you can actually control, extend, and adapt to your business, that is the direction of this project.
+If you want to own your platform, control your data, support specialty inspection workflows, and keep building on top of an open codebase, InspectionPress is aimed at exactly that use case.
