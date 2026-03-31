@@ -3,598 +3,422 @@
 </p>
 
 <p align="center">
-  <b>InspectionPress</b> · Open-source, AI-powered field inspection &amp; reporting OS
+  <b>InspectionPress</b> · Open-source field inspection, reporting, CRM, and scheduling platform
 </p>
 
 <p align="center">
-  <sub>Unlimited inspectors · Unlimited inspections · Unlimited templates &amp; report types · PWA · Twilio · SES · S3 · Outlook/Graph · BuildFax · RentCast</sub>
+  <sub>Self-hosted · PWA-ready · Multi-service · Inspection-focused · Built for real-world field workflows</sub>
 </p>
 
 ---
 
-## Why This Exists
+## Why InspectionPress Exists
 
-InspectionPress was born out of frustration with existing tools:
+InspectionPress was built out of frustration with software that charges per inspection, limits customization, makes specialty forms awkward, and forces companies to work inside somebody else’s box.
 
-- Per-inspection pricing and rigid licensing  
-- Weak support for insurance and specialty forms (including Florida four-point & wind mitigation)  
-- Limited automation and clumsy APIs  
-- Poor handling of real-world team workflows (availability, zones, agencies, call queues, etc.)  
-- A general feeling that you’re renting *someone else’s* tool instead of owning your own stack
+This project is aimed at teams that want to own their stack:
 
-This project is an attempt to fix that:
+- **Self-hosted** and under your control
+- **Open source** and intended to be extended
+- **Built for inspection operations**, not generic forms
+- **Focused on real field workflows** like scheduling, assignment, service-area logic, specialty forms, media-heavy reporting, and partner communication
 
-- **Self-hosted** – you own the data, the hosting, and the knobs  
-- **GPL-licensed** – fork it, bend it, ship it, as long as you respect the GPL  
-- **Automation- and API-friendly** – built to integrate and extend, not wall things off  
-- **Field-first** – focused on people who live in this software all day, not casual users  
-
-> **Honest status:** This is a work-in-progress. There are almost certainly bugs, sharp edges, and missing guardrails. It is provided **as-is, with no warranty expressed or implied**. Test thoroughly, review the code, and contribute fixes if you can.
+> **Status note:** InspectionPress is under active development. Some modules are already usable, some are in heavy iteration, and some roadmap items are planned but not finished yet. Expect rough edges, test thoroughly, and use the issue tracker for bugs and feature requests.
 
 ---
 
-## ✨ High-Level Overview
+## What InspectionPress Is
 
-InspectionPress is a full-stack field operations platform for:
+InspectionPress is a full-stack field operations platform for inspection-based businesses and adjacent service teams, including:
 
-- Inspectors (home, building, insurance, WDO, HVAC, etc.)
-- Appraisers and insurance adjusters
-- Contractors (roofing, electrical, HVAC, specialty trades)
-- Anyone who sends people to locations, fills out structured forms, and produces reports/PDFs
+- Home inspectors
+- Insurance inspection companies
+- Wind mitigation and four-point specialists
+- Roofers and roofing sales teams
+- Appraisers and adjusters
+- Contractors and specialty trades
+- Any field service business that needs structured forms, media capture, scheduling, PDFs, and CRM
 
-Core capabilities:
+At a high level, InspectionPress combines:
 
-- **Scheduling & availability** with inspector/tech auto-assignment
-- **Service areas & zones** with distance and region rules
-- **Service categories** and **agency-based service catalogs**
-- **Dynamic pricing** with custom surcharges (date, time, location, turnaround, etc.)
-- **Full CRM**: clients, agents, agencies, contractors, and leads
-- **Call disposition, outbound call queues, and enhanced SMS logging**
-- **Pre-defined messages** with merge fields (email/SMS/internal)
-- **UUID-based email routing** with auto-attachment to inspections
-- **Property, permit & weather integrations** (BuildFax, RentCast, weather APIs)
-- **Custom inspection/report templates** (including Florida four-point & wind mitigation)
-- **Advanced report writer** with AI narration & narrative libraries
-- **Equipment & asset tracking**
-- **Document uploads & automatic permit attachments**
-- **Time-stamped office notes & internal commentary**
-- **Custom lead submission forms per agency**
-- **PWA** for offline and mobile-first usage
-- **Google Maps & Apple Maps integration**
+- **Scheduling and dispatch**
+- **CRM for customers, agents, and agencies**
+- **Dynamic service pricing and modifiers**
+- **Template-driven report writing**
+- **Specialty inspection form support**
+- **Photo, video, and document handling**
+- **PDF generation and public share links**
+- **Integrations for maps, property data, weather, email, phone, and storage**
 
 ---
 
-## 🧱 Architecture & Stack
+## Current Product Highlights
 
-| Layer        | Tech / Service                                                                 |
-| ------------ | ------------------------------------------------------------------------------ |
-| OS           | Ubuntu Server 20.04+ (22.04+ recommended)                                      |
-| Web server   | Nginx                                                                          |
-| Runtime      | PHP 8.1+ (8.2+ recommended)                                                    |
-| DB           | MariaDB 10.5+ (or MySQL 8+ compatible)                                         |
-| Frontend     | Node.js 18+, Vite, Tailwind CSS, PWA                                           |
-| Package mgrs | Composer 2+ (PHP), npm / yarn (JS)                                             |
-| Hosting      | Amazon Lightsail (or any similar VPS)                                          |
-| Storage      | Amazon S3 (optionally fronted by Cloudflare)                                   |
-| Email        | Amazon SES                                                                     |
-| Identity     | Microsoft Graph (Outlook calendar/email integration)                           |
-| Telephony    | Twilio (voice, SMS, AI campaigns)                                              |
-| Data APIs    | BuildFax (permits), RentCast (property), Weather API, Google Maps, Apple Maps  |
+### Wind Mitigation 2026 Editor and PDF Output
 
----
+The **Wind Mitigation 2026** workflow is one of the biggest focal points of the project right now.
 
-## 🛠 Admin & Company Features
+Current work includes:
 
-### 👥 User, Role & Team Management
+- Dedicated **2026 wind mitigation editor**
+- Form-aware UI built specifically around the Florida OIR-B1-1802 workflow
+- Mapped fields, checkboxes, radio groups, and section-specific logic
+- SVG-driven editing for form fidelity
+- Mobile-focused editing improvements for field use
+- Sticky top navigation and section-focused workflow improvements
+- Per-section hints and reference tools
+- Photo capture, annotation, and section-level media handling
+- Carrier-style PDF rendering with form-specific output rules
+- Ongoing refinements to page rendering, filenames, image pagination, signatures, and specialty field mapping
 
-- Unlimited **users** and **inspectors/field staff**
-- Role-based access control with granular permissions
-- Inspector/tech-specific settings:
-  - Availability (days of week, time windows)
-  - Service areas & zones
-  - Travel radius and overflow rules (max miles out of zone, minimum invoice, etc.)
-- Company branding:
-  - Logos
-  - Report headers/footers
-  - Email signatures and footers
+This is not treated as a generic template. It is being built as a **true specialty form workflow**.
 
-### 🧾 Time-Stamped Office Notes
+### Roof Slope Assistant
 
-- Internal, time-stamped notes on:
-  - Inspections / jobs
-  - Clients
-  - Agents / agencies
-  - Equipment and other entities
-- Keeps a clear internal history of decisions, escalations, and conversations
+InspectionPress now includes a **roof slope assistant** aimed at helping inspectors make faster and more consistent roof-form decisions.
 
----
+Current and recent work around this tool includes:
 
-## 📦 Services, Service Categories & Agency-Based Services
+- Visual roof-slope measurement assistance inside the editor
+- Level-assist behavior to improve interpretation of the image angle
+- Sampling tools that can drive the selected answer in the form
+- UI for working directly from captured imagery instead of manual guesswork alone
+- Tight coupling with roof-related inspection workflows and specialty forms
+- Ongoing refinement of capture behavior, thresholding, and form application logic
 
-### Services & Categories
+The goal is to make the slope workflow more useful in the field, not just add a gimmicky overlay.
 
-- Unlimited **services**:
-  - Home/building inspections
-  - Insurance inspections (four-point, wind mitigation, roof-only, etc.)
-  - Appraisal-style services
-  - WDO/pest inspections
-  - HVAC, electrical, plumbing, and trade-specific inspections
-  - Adjuster/claims inspections
-  - Automotive/fleet inspections
-  - Any custom service you define
-- **Service categories**:
-  - Group services into logical families (e.g. “Home”, “Insurance”, “Add-ons”, “Commercial”)
-  - Configure category defaults for public schedulers and portals
-  - Control which categories appear for which audiences (clients vs agencies vs internal)
+### ASCE API Integration
 
-### Agency-Based Services
+ASCE-related support is a major roadmap emphasis.
 
-- Per-agency service catalogs:
-  - Restrict which services a given agency can book
-  - Define agency-specific bundles or pre-configured packages
-  - Attach agency-specific templates (e.g. preferred pre-acquisition form)
-- Per-agency pricing and rules:
-  - Special rates and discount structures
-  - Different available time windows
-  - Custom agreements and messaging
-- Agency portals:
-  - Agency-branded scheduling pages
-  - Lead submission forms and “request an inspection” flows scoped to that agency
+Planned direction includes:
+
+- Pulling structural / wind-related reference data into inspection workflows where appropriate
+- Supporting better decision assistance for wind-related form completion and roof-related workflows
+- Reducing manual lookups when inspectors need standards-based context during reporting
+
+This area is still evolving, but it is important enough to call out prominently because it fits the broader goal of making specialty inspection workflows smarter and more defensible.
 
 ---
 
-## 💵 Dynamic Pricing & Custom Surcharges
+## Current Features
 
-- Base price per service and per bundle
-- Optional add-ons and upsell services
-- Surcharge rules driven by:
-  - **Date** (holidays, busy season)
-  - **Time of day** (evenings, early mornings)
-  - **Day of week** (weekends vs weekdays)
-  - **ZIP / city / county / zone**
-  - **Distance** from inspector/home office (mileage tiers)
-  - **Property size** (square footage bands)
-  - **Property age** (older homes, premium pricing)
-  - **Turnaround time** (same-day or 24-hour rush)
-- Agency-specific overrides:
-  - Flat rates for key partners
-  - Special bundles for recurring clients
+The following areas are already present in the product in some form and are being actively improved.
 
----
+### Reporting and Form Workflows
 
-## 📑 Templates & Report Types
-
-- Unlimited templates:
-  - Home inspections
-  - Insurance inspection forms
-  - Appraisal checklists
-  - WDO and moisture/termite-specific templates
-  - HVAC/electrical/plumbing inspections
-  - Pre-purchase automotive inspection templates
-  - Municipal/code enforcement checklists
-- **Custom Florida inspection support**:
+- Template-based report writing
+- Section → component → finding hierarchy
+- Rich-text editing for narratives
+- Findings with severity states such as Minor, Major, and Material / Safety Concern
+- Narrative library support
+- Summary views and filtered report views
+- Public UUID-based report access
+- PDF generation for report outputs
+- Specialty form support for:
+  - Wind mitigation
   - Four-point inspections
-  - Wind mitigation (OIR-B1-1802) with full carrier-compatible PDF output
-- Template scopes:
-  - Private templates (per inspector/team)
-  - Company-wide templates
-  - Agency-specific templates
-- Import templates:
-  - CSV / XLS / XLSX
-- Sample templates included so you can start quickly and customize from there
-
----
-
-## 📇 CRM: Clients, Agents, Agencies, Contractors & Leads
-
-### Clients / Customers
-
-- Full client profiles:
-  - Contact info, tags, custom fields
-  - Property history
-  - Inspection/job history
-- Bulk imports for clients from CSV/XLS(X)
-- Internal notes, documents, and communication history
-
-### Agents & Agencies
-
-- Real-estate agents, insurance agents, appraisers, and partner contacts
-- Agency records for:
-  - Brokerages
-  - Insurance agencies and carriers
-  - Appraisal firms
-  - Contractors
-  - Municipal or institutional partners
-- For each agency:
-  - Default services, templates, pricing, and agreements
-  - Custom scheduling URLs and lead forms
-  - Agency-specific communication and pre-defined messages
-- Attach multiple agents & agencies to a single job:
-  - Buyer’s agent, listing agent, insurance agent, adjuster, property manager, etc.
-  - All can be copied on communications and receive UUID-based access links
-
-### Contractors & Other Contacts
-
-- Roofers, electricians, HVAC techs, pest/WDO operators, engineers, HOAs, etc.
-- Easily include them in communication threads and document sharing
-
-### Leads & Agency Lead Forms
-
-- Custom **lead submission forms** per agency:
-  - Embed or link an agency-branded lead form
-  - Control fields and required data per agency or partner
-- Leads flow into:
-  - CRM (as contacts)
-  - Scheduling pipeline
-  - Outbound call queues and automation rules
-
----
-
-## ☎️ Communication, Pre-Defined Messages & Call Queue
-
-### Pre-Defined Messages & Merge Tags
-
-- Central library of **pre-defined messages** for:
-  - Email
-  - SMS
-  - Internal notes/snippets
-- Rich merge field support:
-  - Client details, inspection details, property info
-  - Agency-specific phrases and signatures
-  - UUID-based links for reports, agreements, and payment pages
-- Use pre-defined messages:
-  - When sending transactional communications
-  - Inside call disposition workflows
-  - Within automations
-
-### UUID-Based Email Routing & Auto-Attachments
-
-- Each inspection/job can expose a **UUID-based email address or token**:
-  - Used as reply-to and/or CC in communications
-  - Ensures replies are mapped back to the correct job
-- Inbound messages using that UUID:
-  - Can be associated with the matching inspection/job
-  - Attachments (PDFs, photos, etc.) can be auto-linked to the record
-- Result: replies, extra forms, and supporting documents land in the right place without manual sorting
-
-### Email (SES + Outlook/Graph)
-
-- Transactional & operational email via **Amazon SES**
-- Optional use of Microsoft Graph:
-  - Calendar-based scheduling
-  - Outlook-based mail flows
-- Templates for all common workflows:
-  - New job scheduled
-  - Reschedule/cancel
-  - Reminder / “on my way”
-  - Agreements sent/signed
-  - Report ready/updated
-  - Payment requested/received
-- Email tracking pixel for basic open-tracking on key messages
-
-### Phone & SMS (Twilio)
-
-- Browser-based **click-to-call** from CRM cards
-- Two-way **SMS**:
-  - Confirmation, reminders, agent/client updates
-
-#### Call Disposition & Logging
-
-- Per-call disposition:
-  - Answered / Voicemail / No answer / Wrong number / Other
-  - Free-form notes
-- Rich logging:
-  - View all calls per client/agent/agency/job
-  - Combine with office notes, emails, and SMS threads
-
-#### Outbound Call Queue
-
-- Build **call queues** from:
-  - New leads
-  - Unconfirmed appointments
-  - Past-due invoices
-  - Lost/quiet agents and agencies
-- Work the queue:
-  - One-click dialing
-  - Save disposition and notes
-  - Auto-advance to the next contact
-- Combine with automations:
-  - Add/remove contacts from queues based on behavior and status
-
-#### SMS History & Logging
-
-- Threaded SMS view at the contact or inspection level
-- Status awareness (where available):
-  - Queued, sent, delivered, failed
-
----
-
-## ⚙️ Automation Rules
-
-- Triggered on:
-  - Job scheduling, rescheduling, or cancellation
-  - Agreement sent/viewed/signed
-  - Report created/published/updated
-  - Payment events and invoice status changes
-  - Call disposition and lead status changes
-- Conditions:
-  - Service type
-  - Agency, category, or region
-  - Price, distance, or turnaround time
-  - Lead or job status, call outcomes, etc.
-- Actions:
-  - Send email/SMS
-  - Add to outbound call queue
-  - Notify internal team members
-  - Tag contacts or jobs for reporting
-  - Call custom code hooks/integrations
-
----
-
-## 🧰 Equipment & Asset Tracker
-
-- Inventory management for:
-  - Tools, ladders, meters
-  - Drones, cameras, mobile devices
-  - Laptops, printers, office gear
-- Assign assets to:
-  - Inspectors/techs
-  - Offices, trucks, or storage locations
-- Track:
-  - Check-in/check-out events
-  - Which inspections/jobs used which gear
-  - Responsibility for lost/damaged equipment
-
----
-
-## 🏠 Property, Permits, Maps & Weather
-
-### BuildFax & RentCast
-
-- **BuildFax** integration:
-  - Pull permit history and property details (where licensed)
-- **RentCast** integration:
-  - Property information and market/rent context
-- Caching layer:
-  - Reduces API calls
-  - Improves performance
-  - Cuts external API costs
-
-### Maps
-
-- **Google Maps** and **Apple Maps**:
-  - Visualize inspection/job locations
-  - Launch navigation
-  - See neighborhood context
-
-### Weather
-
-- Weather integration:
-  - Capture conditions near job time and location
-  - Lock conditions once the job is complete
-  - Optional inclusion on reports for documentation and risk context
-
----
-
-## 🗂 Documents, Attachments & Permits
-
-- Upload support for:
-  - PDFs, images, and other common doc types
-- Attach documents to:
-  - Jobs/inspections
-  - Individual sections
-  - Specific findings
-- Auto-attach:
-  - BuildFax permit records to relevant report sections
-  - Inbound email attachments (via UUID routing) to the correct job or contact
-- All documentation ends up:
-  - In one place
-  - Linked to the correct job and stakeholders
-
----
-
-## 🧾 Report Writer, Template Builder & Narrative Library
-
-### Structure & Editing
-
-- Hierarchy:
-  - **Sections → Components → Findings**
-- Required vs optional content
-- Template ordering enforced in live reports
-- **TinyMCE** for rich text everywhere
-- Severity levels:
-  - Minor / Maintenance
-  - Major
-  - Material / Safety / Immediate
-- Additional metadata:
-  - Location tags (e.g. “North elevation”, “Attic – above master”)
-  - Contractor/trade tags (roofing, electrical, HVAC, etc.)
-  - Cost estimate toggles and flags
-- Media:
-  - Inline photos and videos with captions
-  - Galleries and summaries
-
-### AI Integration
-
-- AI-assisted:
-  - Narrative generation and refinement
-  - Simplification or expansion for different audiences
-  - Summaries for clients, agents, or carriers
-- Designed to enhance human judgment, not replace it
-
-### Narrative Library
-
-- Built-in narrative patterns for common defects & scenarios
-- Import your own narrative libraries:
-  - CSV / XLS / XLSX
-- Tag narratives:
-  - System, severity, location, trade, etc.
-- In-editor search and insert:
-  - Pull the right narrative into a finding in seconds
-
----
-
-## 🏝 Custom Florida Inspections & Other Forms
-
-Support for **custom Florida inspections**, including:
-
-- Four-point inspection forms
-- Wind mitigation (OIR-B1-1802)
-- Other carrier and municipality forms via the template system
-
-Key features:
-
-- Form-aware editors:
-  - Mapped inputs, checkboxes, and radios
-- Full PDF output:
-  - Structured to match carrier expectations
-- Suitable for:
-  - Private inspectors
-  - Municipal inspectors
-  - Insurance-only inspection teams
-  - Any region that needs specialty forms
-
----
-
-## 📄 Full & Summary Views + PDF Exports
-
-- **Full report view**:
-  - Everything (sections, findings, media, notes)
-- **Summary view**:
-  - Filtered to key severities and categories
-- PDFs:
-  - Full report PDFs
-  - Summary-only PDFs
-  - Specialty form PDFs (e.g. four-point, wind mitigation)
-- Delivery:
-  - Stored on S3 (optionally via Cloudflare)
-  - Delivered via secure UUID-based links
-  - No login required for clients, agents, or carriers
-
----
-
-## 📱 PWA & Offline Usage
-
-- Progressive Web App:
-  - Installable on Android, iOS (via Safari), and desktop browsers
-- Behaves like a native app:
-  - Home screen icon
-  - Full-screen experience
-- Offline-aware:
-  - Capture data and photos with limited connectivity
-  - Syncs when back online
-
----
-
-## 🌍 Adaptable to Many Industries
-
-InspectionPress is not limited to one niche. It is built to adapt via:
-
-- Custom services
+- Media support in reports:
+  - Photos
+  - Captions
+  - Annotation workflows
+  - Inline video support in key reporting flows
+
+### Scheduling and Inspection Management
+
+- New inspection creation workflows
+- Service selection tied to inspections
+- Property and inspection detail management
+- Unconfirmed inspection handling
+- Inspector assignment workflows
+- Availability-aware scheduling direction
+- Planned and active work around service-area and zone-based assignment
+
+### Pricing and Services
+
+- Service catalog management
 - Service categories
-- Templates and forms
-- Agency and pricing rules
-- Automations and call queues
+- Template-to-service linkage
+- Dynamic pricing logic based on factors like:
+  - Square footage
+  - Property age
+  - Distance / mileage
+- Add-on service support
+- Modifier UI work for inspection pricing behavior
 
-Common use cases:
+### CRM
 
-- Home & building inspections  
-- Real-estate **appraisals**  
-- Insurance **adjusting** and claim inspections  
-- **Roofing** inspections and scopes  
-- **Electrical** and **HVAC** evaluations  
-- **WDO / pest** inspections  
-- **Automotive** inspections (pre-purchase, fleet, specialty)  
-- Municipal/rental/code inspections  
+- Customer records
+- Agent records
+- Agency records
+- Import workflows for customers, agents, agencies, and templates
+- CRM-style detail views and edit pages
+- Internal notes and record history direction
+- Duplicate merge workflows for contacts
 
-If your workflow involves field visits, structured checklists, media, and reports, InspectionPress can be bent into shape.
+### Invoices, Documents, and Operational Records
 
----
+- Invoice module groundwork and active build-out
+- Inspection-linked and standalone invoice direction
+- Document uploads tied to inspections
+- PDF storage / sharing workflows
+- Public document access patterns through UUID-style links
 
-## 🔌 Integrations Overview
+### Mapping, Property, and Weather
 
-- **Cloudflare** – CDN, WAF, edge caching
-- **Amazon S3** – File storage (photos, docs, PDFs)
-- **Amazon SES** – Outbound email
-- **Amazon Lightsail** – Simple VPS hosting
-- **Microsoft Graph** – Outlook calendar/email integration
-- **Twilio** – Voice, SMS, call disposition, outbound queues, AI campaigns
-- **BuildFax** – Permit data with caching
-- **RentCast** – Property/rent data with caching
-- **Weather APIs** – Job-time weather conditions
-- **Google Maps & Apple Maps** – Maps and navigation
+- Google Maps / Places integration work
+- Address lookup and map-assisted workflows
+- BuildFax integration direction
+- RentCast integration direction
+- Weather block support for inspection conditions and locked-at-inspection-time weather context
 
----
+### Admin, Roles, and Permissions
 
-## ⚙️ System Requirements
+- Admin panel for core modules
+- User / employee / inspector management direction
+- Roles and permissions support
+- GUI-based permissions matrix work
+- Branding settings for report headers, footers, and other company-facing output
 
-### Server
+### Communications and Telephony
 
-- Ubuntu Server **20.04+** (22.04+ recommended)
-- Nginx
-- PHP **8.1+** (8.2+ recommended) with:
-  - `mbstring`, `openssl`, `pdo_mysql`, `gd`, `curl`, `zip`, `intl`, `fileinfo`, `json`
-- MariaDB **10.5+** (or MySQL 8+)
-- Node.js **18+**
-- npm or yarn
-- Composer **2+**
+- Twilio integration direction for browser-based calling
+- Call buttons from CRM views
+- SMS / voice workflow direction
+- Outlook / Microsoft 365 integration plans for scheduling and communication
+- Automated email workflow direction for appointment and report events
 
-### Background Tasks
+### PWA and Mobile-Focused Work
 
-InspectionPress uses the Laravel scheduler and queue system for:
-
-- Email sending  
-- PDF generation  
-- Imports & migrations  
-- API integrations & syncs  
-- Time-based automations  
-- Outbound call queue processing  
-
-You should run the scheduler and at least one queue worker using your preferred process manager (cron, systemd, Supervisor, etc.), following standard Laravel practices.
-
-### Storage & External Services
-
-- Amazon S3 bucket for uploads & report PDFs
-- Amazon SES credentials for email
-- (Optional) Cloudflare in front of app and/or S3
-- Microsoft Graph app registration
-- Twilio account and phone numbers
-- BuildFax, RentCast, Weather API credentials as needed
-- Google Maps API key and optional Apple Maps deep-linking
+- Progressive Web App direction for the report writer and broader field use
+- Mobile-specific editing improvements
+- Offline-aware design goals
+- Installable, app-like workflow direction for field inspectors
 
 ---
 
-## 📜 License & Warranty
+## Planned Features and Active Roadmap
+
+InspectionPress is being built as a broad inspection operations platform, not just a single report editor. Major roadmap areas include:
+
+### Specialty Inspection Expansion
+
+- Continued hardening of **Wind Mitigation 2026**
+- Continued hardening of **Four Point** form workflows
+- Additional Florida and carrier-specific form support
+- More inspection-type-specific editors instead of forcing everything through one generic UI
+
+### Smarter Inspection Assistance
+
+- Expanded **ASCE API** usage where it meaningfully supports inspection decisions
+- Better standards-aware workflows for wind and roof-related forms
+- Continued refinement of roof measurement and classification helpers
+- More field-side decision assistance tools that reduce repetitive manual lookup work
+
+### Full Operational Platform Features
+
+- More complete invoice and payment handling
+- Square and Stripe payment flows
+- Customer and partner portals
+- Agent-specific pricing and service visibility
+- Region-based pricing and inspector assignment
+- More automation around scheduling, reminders, confirmations, and delivery
+- Deeper inspection-to-CRM-to-invoice linking
+
+### Communication and Collaboration
+
+- More complete Twilio browser calling
+- End-call and call-state improvements across CRM views
+- Email templates and notification pipelines
+- Outlook / Microsoft 365 calendar integration
+- Additional transactional communication workflows
+
+### Data and Integrations
+
+- Continued BuildFax and RentCast improvements
+- More robust weather integration for inspection records
+- Better document ingestion and attachment workflows
+- S3-compatible storage options and cloud backup flexibility
+
+### UX and Platform Polish
+
+- More consistency across specialty modals and editor tools
+- Better tablet and mobile layouts
+- Cleaner admin UI throughout the platform
+- More reusable shared components for form editors and specialty tools
+
+---
+
+## Core Modules
+
+### 1. Inspection Scheduler
+
+InspectionPress is being built to support real scheduling complexity, including:
+
+- Customer creation during scheduling
+- Agent / agency linking
+- Service-based booking flows
+- Property-aware pricing
+- Inspector assignment logic
+- Availability and duration-aware scheduling direction
+- Support for embedded scheduler experiences
+
+### 2. Report Writer
+
+The report writer is one of the central pieces of the platform.
+
+Goals and current direction include:
+
+- Fast narrative entry
+- Rich media support
+- Better mobile usability
+- Template-driven structure
+- Severity-based summary workflows
+- AI-assisted narrative refinement in the future
+- Specialty editors where a generic report builder is not enough
+
+### 3. CRM
+
+InspectionPress treats CRM as part of inspection operations, not a separate afterthought.
+
+Supported or planned records include:
+
+- Customers
+- Agents
+- Agencies
+- Inspectors / employees
+- Related communication and inspection history
+
+### 4. Services and Pricing
+
+Services are intended to be flexible enough for:
+
+- Standard home inspections
+- Insurance forms
+- Add-ons
+- Roof-only inspections
+- Trade-specific inspections
+- Agency-specific service offerings
+
+### 5. Forms and PDFs
+
+The system is designed to support:
+
+- General narrative inspection reports
+- Summary reports
+- Carrier-style specialty forms
+- Exact or near-exact PDF output requirements for real-world use cases
+
+---
+
+## Integrations
+
+Current or planned integrations include:
+
+- **Google Maps / Places** for address and map workflows
+- **BuildFax** for permit and property history direction
+- **RentCast** for property data direction
+- **Weather.gov / weather APIs** for inspection-time conditions
+- **Twilio** for browser calling, SMS, and communication workflows
+- **Outlook / Microsoft 365 / Graph** for calendar and email direction
+- **Square** for payments
+- **Stripe** for payments
+- **Amazon S3** and S3-compatible storage for files and PDFs
+
+---
+
+## Tech Stack
+
+| Layer | Stack |
+| --- | --- |
+| Backend | Laravel / PHP |
+| Frontend | Blade, Alpine.js, Tailwind CSS, JavaScript |
+| Build tools | Vite, Node.js |
+| Database | MySQL / MariaDB |
+| Storage | Local and S3-compatible storage |
+| PDFs / forms | SVG- and template-driven rendering workflows |
+| Mobile strategy | PWA-first direction |
+
+---
+
+## Who This Is For
+
+InspectionPress is being built for companies that need more control than typical inspection SaaS platforms allow.
+
+That includes teams doing:
+
+- Home inspections
+- Wind mitigations
+- Four-point inspections
+- Roof inspections
+- Insurance inspections
+- Contractor field documentation
+- Specialty trade evaluations
+- Property condition reporting
+
+If your workflow involves field visits, photos, specialty forms, structured findings, scheduling, partner coordination, and PDF delivery, this project is likely relevant.
+
+---
+
+## Development Philosophy
+
+A few themes keep driving this project:
+
+- **Own your stack** instead of renting critical workflow infrastructure
+- **Build for actual inspection use** instead of generic forms alone
+- **Support specialty forms properly** when they deserve custom workflows
+- **Favor field usability** on phones and tablets
+- **Keep the door open for automation and integrations**
+
+InspectionPress is opinionated in the sense that it is being built from real inspection workflow pain points, but flexible in the sense that the platform is meant to be extended.
+
+---
+
+## Contributing and Feedback
+
+This project is a work in progress and feedback matters.
+
+Please use the issue tracker for:
+
+- Bugs
+- Workflow issues
+- Inspection-specific edge cases
+- Form fidelity problems
+- UI / UX suggestions
+- Feature requests
+
+Special attention is especially helpful on:
+
+- Wind Mitigation 2026 behavior and PDF fidelity
+- Roof slope assistant behavior and usability
+- Specialty form workflows
+- Tablet and mobile field use
+- Integration edge cases
+
+---
+
+## License and Warranty
 
 InspectionPress is released under the **GNU General Public License (GPL)**.
 
-You may:
+You may use it, study it, modify it, and redistribute it in accordance with the GPL.
 
-- Use it for commercial or non-commercial purposes  
-- Study the source, modify it, and extend it  
-- Redistribute original or modified versions, as long as you comply with the GPL  
+**No warranty is provided.**
 
-**No Warranty**
-
-This software is provided **as-is**, with **no warranty expressed or implied**, including (but not limited to) any implied warranties of merchantability or fitness for a particular purpose. Use it at your own risk. You are responsible for:
-
-- Verifying correctness and suitability for your workflows  
-- Complying with local laws, regulations, and carrier requirements  
-- Handling backups, security, and disaster recovery  
+Use the software at your own risk. Verify all calculations, generated PDFs, workflow behavior, and regulatory or carrier-specific requirements before relying on it in production.
 
 ---
 
-## 💡 In Short
+## In Short
 
-InspectionPress is:
+InspectionPress is evolving into a full inspection operations platform with strong emphasis on:
 
-- A deeply configurable **field operations OS**
-- Built out of real-world frustration with existing software
-- Designed for inspectors, appraisers, adjusters, and contractors
-- Packed with:
-  - Agency-based services and service categories  
-  - Call queues, dispositions, and pre-defined messages  
-  - UUID-based email routing and auto-attachments  
-  - Advanced templates, automation, and PWA support  
+- **Wind Mitigation 2026**
+- **Four Point workflows**
+- **Roof slope assistance**
+- **Specialty-form PDF output**
+- **Scheduling, CRM, and pricing in one stack**
+- **Self-hosted, open, inspection-first architecture**
 
-Use it as the backbone of your own operation, turn it into a product, or fork it into something new. Just expect bugs, test thoroughly, and if you improve it—consider sending a pull request.
+If you want an inspection platform you can actually control, extend, and adapt to your business, that is the direction of this project.
