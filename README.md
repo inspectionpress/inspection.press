@@ -815,13 +815,13 @@ Permit capabilities include:
 - Permit inspection records
 - Permit utilization reports
 - Permit backlog snapshots
-- Accela scraper support
+- Municipal permit platform scraper support
 - Generic permit source scraper support
-- Treasure Island EnerGov client/store support
+- Jurisdiction-specific permit client/store support
 - Permit source list command
-- Import Accela permit results command
-- Import Accela inspections command
-- Import Treasure Island permits command
+- Import permit results command
+- Import permit inspections command
+- Import jurisdiction permits command
 - Backfill permit inspection fields command
 - Dedupe permit backlog snapshots command
 - Dedupe permit inspection records command
@@ -904,12 +904,12 @@ Automation capabilities include:
 - Retry/cancel SMS automation events
 - Lifecycle events for inspection creation, requests, confirmation, scheduling, rescheduling, cancellation, completion, no-show, invoices, agreements, documents, report publishing, admin notes, status changes, email, SMS, upsells, and manual triggers
 
-### Dashboard, Delores, GA4, and Google Ads
+### Dashboard, AI Assistant, GA4, and Google Ads
 
 Operations and marketing intelligence capabilities include:
 
 - Admin dashboard
-- Holigosa dashboard service
+- Dashboard service
 - Dashboard GA4 endpoint
 - Dashboard Google Ads endpoint
 - Dashboard pulse endpoint
@@ -919,11 +919,11 @@ Operations and marketing intelligence capabilities include:
 - Recent email/SMS/call previews
 - Bug snapshot
 - Market launch dashboard block
-- Delores analytics overview
-- Delores realtime endpoint
-- Delores historical endpoint
-- Delores predictions endpoint
-- Delores snapshot endpoint
+- AI Assistant analytics overview
+- AI Assistant realtime endpoint
+- AI Assistant historical endpoint
+- AI Assistant predictions endpoint
+- AI Assistant snapshot endpoint
 - GA4 Data API service
 - GA4 realtime and historical reports
 - GA4 key-event enrichment
@@ -987,7 +987,7 @@ Public area capabilities include:
 - Preview routes
 - Live routes
 - Florida-focused public geography config
-- WordPress area/city import
+- CMS area/city import
 - Service-area coverage sync from county zones
 - County SVG ID mapping
 - Covered-county map rendering
@@ -1003,12 +1003,12 @@ Review capabilities include:
 - Google Business Profile OAuth connect/callback/disconnect
 - Google Business Profile location selection
 - Google Business Profile sync
-- Google Takeout review import command
-- Spectora HTML review import command
+- Review archive import command
+- Legacy HTML review import command
 - Public review profiles and public reviews tables
 - Fallback rating/count configuration
 
-### CMS and WordPress Migration
+### CMS and Site Migration
 
 CMS capabilities include:
 
@@ -1023,11 +1023,11 @@ CMS capabilities include:
 - CMS revisions
 - Public CMS route resolver
 - Public CMS catch-all route
-- WordPress snapshot import
-- WordPress media audit
+- CMS snapshot import
+- CMS media audit
 - CMS rendering audit
-- Legacy WordPress shortcodes cleanup/rendering
-- Legacy rows/columns, captions, buttons, galleries, video, embeds, Ninja tables, and MapSVG placeholders
+- Legacy CMS shortcode cleanup/rendering
+- Legacy rows/columns, captions, buttons, galleries, video, embeds, tables, and map placeholders
 - YouTube iframe rendering
 - Media URL normalization
 
@@ -1169,22 +1169,22 @@ Current source-backed import/maintenance tooling includes:
 - Template XLS import
 - Template CSV import/export
 - Narrative import
-- CMS WordPress snapshot import
-- WordPress media audit
-- WordPress area/city import
+- CMS snapshot import
+- CMS media audit
+- CMS area/city import
 - Public area audit
 - Public pricing inspect/detect changes
 - BuildFax background fetch
-- Spectora legacy inspection import
-- Spectora reviews import
-- Spectora imported reports S3 migration
-- Spectora photo fix command
-- Banyan legacy inspection import
-- Summit legacy inspection import
-- Tiber legacy EML import
-- Banyan duplicate merge command
+- Legacy inspection import
+- Legacy review import
+- Legacy report storage migration
+- Legacy photo repair command
+- Additional legacy inspection import
+- Additional legacy inspection import
+- Legacy EML import
+- Legacy duplicate merge command
 - Legacy phone provider import
-- Mautic legacy CRM/communication import
+- Legacy CRM/communication import
 - Google Reviews Takeout import
 - Google Ads forensic audit export
 - Serial decoder CSV import
@@ -1242,7 +1242,7 @@ The offline/PWA surface is an active development area. Treat it as a direction a
 | SMS/voice | Twilio SDK, Twilio browser voice, Twilio webhooks |
 | Payments | Square and Stripe |
 | Contractor payouts | Stripe Connect |
-| Property/permit data | BuildFax, RentCast, Accela, EnerGov, custom permit sources |
+| Property/permit data | BuildFax, RentCast, municipal permit platforms, and custom permit sources |
 | Maps/geocoding | Google Maps/Geocoding/Places, public map helpers |
 | Analytics/marketing | GA4 Data API, Google Ads API, attribution tables |
 | AI | OpenAI API, local AI bridge/proxy, serial/OCR/vision support |
@@ -1273,7 +1273,7 @@ The audited source contains 261 controller files, 1,073 registered routes, 225 m
 | AI/content intelligence | `FindingAiAnalysisController`, `TinyMceChatGptProxyController`, `SerialDecoderController`, `RecallCheckerController`, `LocalAiIntelligenceController`, `AiAgentKnowledgeController` | AI finding analysis, AI text assistance, serial decoding, OCR/vision, recall lookup/pinning, local AI bridge, and voice-agent knowledge |
 | Templates/narratives | `Template*Controller`, `NarrativeLibraryController`, `RecommendationController`, `RecommendationPlaceMapController`, `FindingRecommendationController` | Template structure, imports, narrative library, reference photos, recommendation library, and Google Places mappings |
 | Public website/CMS | `PublicLandingPageController`, `Public/AreaPageController`, `Public/LiveAreaPageController`, `Public/CmsPublicController`, `Admin/Cms/*`, `PublicSitemapController`, `PublicRobotsController`, `GoogleReviewsController` | Public pages, service/area pages, CMS migration, CMS tables, reviews, sitemap, robots, public areas, and SEO metadata |
-| Analytics/marketing | `DashboardController`, `DeloresAnalyticsController`, `GoogleAdsController`, `GoogleAdsBottleneckController`, `MarketLaunchController`, `MarketLaunchTaskController` | Admin dashboard, GA4, Google Ads sync/insights, predictions, recommendations, market launch planning, and operational pulse |
+| Analytics/marketing | `DashboardController`, analytics controllers, `GoogleAdsController`, `GoogleAdsBottleneckController`, `MarketLaunchController`, `MarketLaunchTaskController` | Admin dashboard, AI Assistant analytics, GA4, Google Ads sync/insights, predictions, recommendations, market launch planning, and operational pulse |
 | Admin/security/support | `UserController`, `UserManagementController`, `RoleController`, `PermissionController`, `SettingsController`, `CompanySettingsController`, `Help*Controller`, `TrainingModuleController`, `BugReportController`, `EquipmentController`, `NotFoundRequestController` | Users, roles, permissions, settings, company config, help/training, bugs, equipment, 404 logs, and internal operations |
 | Auth/calendar/integrations | `Auth/*`, `CalendarController`, `CalendarFeedController`, `CalendarIcalController`, `OutlookController`, `Inspector/CalendarConnectorController` | Login/password/email verification, inspector password setup, calendar feeds, external calendar connectors, and Outlook/Graph flows |
 | Short links/public access | `ShortLinkController`, `ShortLinkRedirectController`, `PublicHostAccessController`, `PublicInspectorFeedController` | Branded short links, redirect safety, visit/destination history, public host controls, and public staff feed |
@@ -1301,7 +1301,7 @@ The schema is broad. Important durable concepts include:
 | Permits | `PermitJurisdiction`, `PermitScrapeSource`, `PermitScrapeRun`, `PermitRecord`, `PermitInspectionRecord`, `PermitBacklogSnapshot` |
 | Public site/CMS | `LandingPage`, `PublicCounty`, `PublicCity`, `PublicReview`, `CmsPage`, `CmsPost`, `CmsMedia`, `CmsTable` |
 | AI/reference data | `AiAgentKnowledge`, `NarrativeLibrary`, `SerialDecoderRule`, `SerialDecoderSource`, `Manufacturer`, `Brand`, `ApplianceType` |
-| Marketing | `GoogleAdsAttribution`, `GoogleAdsDailyMetric`, `GoogleAdsSearchTerm`, `GoogleAdsInsight`, `GoogleAdsRecommendation`, `DeloresAnalyticsSnapshot` |
+| Marketing | `GoogleAdsAttribution`, `GoogleAdsDailyMetric`, `GoogleAdsSearchTerm`, `GoogleAdsInsight`, `GoogleAdsRecommendation`, analytics snapshots |
 
 ---
 
@@ -1327,7 +1327,7 @@ InspectionPress can integrate with:
 - **BuildFax** - property and permit history workflows
 - **RentCast** - property data workflows
 - **ASCE** - wind/specialty documentation support
-- **Accela and EnerGov** - permit record and inspection import/scrape support
+- **Municipal permit platforms** - permit record and inspection import/scrape support
 - **Cloudflare** - commonly used for DNS/CDN/WAF/edge behavior in production deployments
 
 Not every installation needs every integration. Many integrations are optional or environment-configured.
