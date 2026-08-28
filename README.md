@@ -1,14 +1,103 @@
 <p align="center">
-  <img src="https://dummyimage.com/600x120/020617/38bdf8&text=InspectionPress" alt="InspectionPress" />
+  <img src="https://dummyimage.com/1200x260/020617/38bdf8&text=InspectionPress" alt="InspectionPress" />
 </p>
 
 <p align="center">
-  <b>InspectionPress</b> - Open-source, self-hosted field inspection, reporting, CRM, communications, scheduling, billing, and operations OS
+  <b>Open-source, self-hosted field inspection, reporting, CRM, communications, scheduling, billing, and operations OS.</b>
 </p>
 
 <p align="center">
-  <sub>Unlimited inspectors - Unlimited inspections - Unlimited templates & report types - Public scheduler - Inspector portal - Client portal - PWA - Twilio - SES - SNS - S3 - Outlook/Graph - Google - BuildFax - RentCast - ASCE - OpenAI</sub>
+  <img alt="Self Hosted" src="https://img.shields.io/badge/Self--Hosted-Yes-0f172a?style=for-the-badge" />
+  <img alt="Laravel" src="https://img.shields.io/badge/Laravel-9.x-ff2d20?style=for-the-badge" />
+  <img alt="PHP" src="https://img.shields.io/badge/PHP-8.1%2B-777bb4?style=for-the-badge" />
+  <img alt="MySQL" src="https://img.shields.io/badge/MySQL%20%2F%20MariaDB-Ready-4479a1?style=for-the-badge" />
+  <img alt="PWA" src="https://img.shields.io/badge/PWA-Mobile--First-7c3aed?style=for-the-badge" />
+  <img alt="License" src="https://img.shields.io/badge/License-GPL-16a34a?style=for-the-badge" />
 </p>
+
+<p align="center">
+  <img alt="Twilio" src="https://img.shields.io/badge/Twilio-Voice%20%2B%20SMS-f22f46?style=flat-square" />
+  <img alt="AWS" src="https://img.shields.io/badge/AWS-SES%20%2B%20SNS%20%2B%20S3-ff9900?style=flat-square" />
+  <img alt="Microsoft Graph" src="https://img.shields.io/badge/Microsoft%20Graph-Outlook-2563eb?style=flat-square" />
+  <img alt="Google" src="https://img.shields.io/badge/Google-Maps%20%2B%20Ads%20%2B%20Reviews-4285f4?style=flat-square" />
+  <img alt="OpenAI" src="https://img.shields.io/badge/OpenAI-Assisted%20Workflows-10a37f?style=flat-square" />
+  <img alt="ASCE" src="https://img.shields.io/badge/ASCE-Wind%20Support-0ea5e9?style=flat-square" />
+</p>
+
+---
+
+## Start Here
+
+> [!NOTE]
+> InspectionPress is an open-source field operations platform for inspection businesses that want to own their software stack instead of renting a rigid per-inspection system.
+
+> [!IMPORTANT]
+> The audited application is working in production, but this project is still moving quickly. Review the code, test thoroughly, and treat every workflow as your responsibility before using it with real clients.
+
+> [!WARNING]
+> InspectionPress is open source, but production deployments can still require paid third-party services such as hosting, object storage, email, SMS/voice, payments, maps, property data, permit data, and AI APIs.
+
+## At a Glance
+
+| Topic | What InspectionPress Provides |
+| --- | --- |
+| **Core product** | A self-hosted operating system for inspection scheduling, field reporting, CRM, communications, billing, and delivery. |
+| **Best fit** | Inspection companies, specialty inspectors, adjusters, appraisers, contractors, and other field teams that need structured forms, media-heavy documentation, and operational records. |
+| **Field workflow** | Public booking, admin dispatch, inspector portal, report writer, mobile/PWA direction, rapid media capture, specialty forms, and secure client delivery. |
+| **Business workflow** | Customers, agents, agencies, partner programs, invoices, payments, agreements, automations, communications, and marketing attribution. |
+| **Customization model** | Unlimited users, inspectors, services, service categories, templates, report types, agency rules, pricing modifiers, messages, and automation logic. |
+| **Reality check** | Built from a production Laravel codebase with hundreds of controllers, models, migrations, routes, views, and background commands. |
+
+## Source Audit Snapshot
+
+This README was expanded from a controller/source audit of the production codebase. The numbers below explain why the feature inventory is long: InspectionPress is not just a report writer, scheduler, CRM, or dialer. It is all of those pieces wired together.
+
+<p align="center">
+  <img alt="Controllers" src="https://img.shields.io/badge/Controllers-261-0284c7?style=for-the-badge" />
+  <img alt="Routes" src="https://img.shields.io/badge/Routes-1%2C073-16a34a?style=for-the-badge" />
+  <img alt="Models" src="https://img.shields.io/badge/Models-225-f97316?style=for-the-badge" />
+  <img alt="Migrations" src="https://img.shields.io/badge/Migrations-390-a855f7?style=for-the-badge" />
+  <img alt="Blade Views" src="https://img.shields.io/badge/Blade%20Views-600-ec4899?style=for-the-badge" />
+</p>
+
+| Source Area | Audited Count | Why It Matters |
+| --- | ---: | --- |
+| Controllers | 261 | Shows the breadth of admin, public, inspector, API, billing, communication, specialty report, and integration workflows. |
+| Routes | 1,073 | Reflects a mature app surface across admin tools, public booking, report delivery, APIs, webhooks, and field workflows. |
+| Models | 225 | Represents the operational data model behind inspections, reports, CRM, billing, communications, permits, marketing, and AI tooling. |
+| Migrations | 390 | Shows substantial production evolution, not a thin prototype. |
+| Blade views | 600 | Reflects a large server-rendered UI surface for admins, inspectors, clients, public pages, and specialty editors. |
+
+## README Map
+
+| Looking For | Start With |
+| --- | --- |
+| The basic pitch | [Why This Exists](#why-this-exists) and [What InspectionPress Is](#what-inspectionpress-is) |
+| The fastest feature scan | [Feature Map](#feature-map) |
+| Specialty inspection tools | [Production Highlights](#production-highlights) |
+| Scheduling, pricing, templates, report writer, and delivery | [Main Product Areas](#main-product-areas) |
+| Customers, agents, agencies, leads, and partner workflows | [CRM and Partner Workflows](#crm-and-partner-workflows) |
+| Email, SMS, inbox, browser dialer, and voice support | [Communications](#communications) |
+| Invoices, payments, agreements, and contractor pay | [Billing, Payments, and Compensation](#billing-payments-and-compensation) |
+| BuildFax, RentCast, maps, weather, permits, recalls, and external data | [Property, Permit, Map, Weather, and External Data](#property-permit-map-weather-and-external-data) |
+| AI, automations, dashboards, GA4, and Google Ads | [AI, Automation, and Intelligence](#ai-automation-and-intelligence) |
+| Public pages, reviews, CMS, SEO, and short links | [Public Website, Reviews, CMS, and SEO](#public-website-reviews-cms-and-seo) |
+| Architecture, stack, requirements, license, and roadmap | [Architecture and Stack](#architecture-and-stack) onward |
+
+## Feature Map
+
+| Area | Highlights |
+| --- | --- |
+| <img alt="Scheduling" src="https://img.shields.io/badge/Scheduling-Dispatch-0284c7?style=flat-square" /> | Public scheduler, admin booking, inspector matching, service areas, zones, availability, rescheduling, cancellation, arrival status, and calendar flows. |
+| <img alt="Reports" src="https://img.shields.io/badge/Reports-Media-16a34a?style=flat-square" /> | Multi-report inspections, templates, sections, components, findings, summaries, PDFs, photos, videos, 360 media, annotations, captions, and ZIP downloads. |
+| <img alt="Specialty" src="https://img.shields.io/badge/Specialty-Forms-f97316?style=flat-square" /> | Four Point, Roof Certification, legacy Wind Mitigation, Wind Mitigation 2026, pre-acquisition reports, ASCE evidence, signatures, and high-fidelity SVG/PDF output. |
+| <img alt="CRM" src="https://img.shields.io/badge/CRM-Partners-ec4899?style=flat-square" /> | Customers, agents, agencies, unconfirmed agencies, partner programs, leads, tags, imports, merge flows, communication history, and activity timelines. |
+| <img alt="Comms" src="https://img.shields.io/badge/Comms-Inbox-7c3aed?style=flat-square" /> | SES email, inbound email routing, UUID-linked inspection communication, SMS, templates, merge tags, universal inbox, browser dialer, calls, dispositions, and Twilio webhooks. |
+| <img alt="Billing" src="https://img.shields.io/badge/Billing-Payments-eab308?style=flat-square" /> | Invoices, line items, public payment pages, Square, Stripe, refunds, payment state, agreements, contractor compensation, wallets, mileage, payouts, and Stripe Connect. |
+| <img alt="Property" src="https://img.shields.io/badge/Property-Data-14b8a6?style=flat-square" /> | Property records, BuildFax, RentCast, permits, weather, Google Maps/Places, distance calculations, Apple Maps links, generated evidence, and contractor lookup. |
+| <img alt="AI" src="https://img.shields.io/badge/AI-Automation-a855f7?style=flat-square" /> | AI report assistance, narrative library, serial decoder, OCR/vision fallback, recall checker, AI Assistant analytics, local AI bridge, automation rules, and SMS automation. |
+| <img alt="Public" src="https://img.shields.io/badge/Public-Site-0ea5e9?style=flat-square" /> | Service pages, area pages, reviews, sitemap, robots, CMS pages/posts/media/tables, redirects, short links, public report delivery, and secure client access. |
+| <img alt="Admin" src="https://img.shields.io/badge/Admin-Team-334155?style=flat-square" /> | Users, roles, permissions, settings, inspector onboarding, help, training, bug reports, equipment, 404 logs, market launch planning, and operational dashboards. |
 
 ---
 
@@ -30,7 +119,11 @@ This project is an attempt to fix that:
 - **Field-first** - focused on people who live in this software all day, not casual users
 - **Operations-aware** - scheduling, reporting, payments, communication, marketing attribution, and team management all live in one system
 
-> **Honest status:** InspectionPress is a work-in-progress, but it is also working in production. Real inspections are being scheduled, documented, edited, billed, paid, and delivered through it right now. There are still bugs, sharp edges, company-specific assumptions, and fast-moving areas of development. It is provided as-is, with no warranty expressed or implied. Test thoroughly, review the code, and use the issue tracker for bugs, regressions, and feature requests.
+> [!IMPORTANT]
+> InspectionPress is a work-in-progress, but it is also working in production. Real inspections are being scheduled, documented, edited, billed, paid, and delivered through it right now.
+
+> [!CAUTION]
+> There are still bugs, sharp edges, deployment-specific assumptions, and fast-moving areas of development. It is provided as-is, with no warranty expressed or implied. Test thoroughly, review the code, and use the issue tracker for bugs, regressions, and feature requests.
 
 ---
 
@@ -50,7 +143,7 @@ InspectionPress is a full-stack field operations platform for inspection-heavy b
 - Public website pages, service pages, area pages, reviews, sitemap, and CMS migration tools
 - Marketing and operations dashboards driven by inspection data, GA4, and Google Ads
 
-The production application audited for this README includes company-specific branding and assumptions, but the underlying platform is meant to be forked and adapted for other inspection or field-service businesses.
+The production application audited for this README includes deployment branding and assumptions, but the underlying platform is meant to be forked and adapted for other inspection or field-service businesses.
 
 ---
 
@@ -90,6 +183,14 @@ Core capabilities include:
 ## Production Highlights
 
 InspectionPress is broader than any single module, but several production workflows deserve specific mention.
+
+| Highlight | What It Covers |
+| --- | --- |
+| <img alt="Wind 2026" src="https://img.shields.io/badge/Wind-2026-0284c7?style=flat-square" /> | OIR-B1-1802 editor, ASCE evidence, mapped fields, SVG/PDF output, signatures, and photo pages. |
+| <img alt="Four Point" src="https://img.shields.io/badge/Four-Point-f97316?style=flat-square" /> | Roof, electrical, plumbing, HVAC, photo pages, SVG preview, PDF output, and report-instance support. |
+| <img alt="Roof" src="https://img.shields.io/badge/Roof-Certification-16a34a?style=flat-square" /> | Focused roof documentation, signatures, photo pages, public PDF delivery, and carrier-style output. |
+| <img alt="Pre Acquisition" src="https://img.shields.io/badge/Pre--Acquisition-Reports-a855f7?style=flat-square" /> | Dedicated schema, property/weather prefill, galleries, direct video upload, public viewer, and ZIP exports. |
+| <img alt="Intelligence" src="https://img.shields.io/badge/Image%20%2B%20Recall-Tools-ec4899?style=flat-square" /> | Roof slope assistance, serial decoding, OCR/vision, recall lookup, and recall pinning into findings. |
 
 ### Wind Mitigation 2026
 
@@ -214,6 +315,14 @@ Current source-backed capabilities include:
 ---
 
 ## Main Product Areas
+
+| Product Area | Reader-Friendly Summary |
+| --- | --- |
+| <img alt="Scheduling" src="https://img.shields.io/badge/Scheduling-Core-0284c7?style=flat-square" /> | Book, quote, assign, reschedule, cancel, and track jobs from public and admin workflows. |
+| <img alt="Inspections" src="https://img.shields.io/badge/Inspections-Records-16a34a?style=flat-square" /> | Keep property, people, services, notes, documents, weather, permits, payments, reports, and status together. |
+| <img alt="Pricing" src="https://img.shields.io/badge/Pricing-Rules-eab308?style=flat-square" /> | Configure service catalogs, categories, agency overrides, distance, property-size, age, region, and premium-time rules. |
+| <img alt="Templates" src="https://img.shields.io/badge/Templates-Reports-f97316?style=flat-square" /> | Build reusable report structures with sections, components, findings, defaults, imports, and specialty writers. |
+| <img alt="Writer" src="https://img.shields.io/badge/Report%20Writer-Tools-a855f7?style=flat-square" /> | Create rich findings with media, AI assistance, recommendations, summaries, PDFs, and client delivery. |
 
 ### Scheduling and Dispatch
 
@@ -457,6 +566,14 @@ Delivery capabilities include:
 
 ## CRM and Partner Workflows
 
+| Relationship Type | Included Workflow |
+| --- | --- |
+| <img alt="Customers" src="https://img.shields.io/badge/Customers-CRM-0284c7?style=flat-square" /> | Profiles, inspection history, tags, imports, communication history, notes, documents, and merge workflows. |
+| <img alt="Agents" src="https://img.shields.io/badge/Agents-CRM-ec4899?style=flat-square" /> | Contact records, agencies, jobs, calls, SMS, email, imports, tagging, search, and partner communication. |
+| <img alt="Agencies" src="https://img.shields.io/badge/Agencies-CRM-f97316?style=flat-square" /> | Service catalogs, pricing, templates, agreements, public forms, settings, contacts, and branded workflows. |
+| <img alt="Leads" src="https://img.shields.io/badge/Leads-Intake-16a34a?style=flat-square" /> | Acquisition profiles, contacts, activities, timelines, queued emails, template previews, and conversion tracking. |
+| <img alt="Partners" src="https://img.shields.io/badge/Partners-Programs-a855f7?style=flat-square" /> | Roofing partner pages, contractor contacts, partner submissions, confirmation flows, and operational follow-up. |
+
 ### Customers
 
 Customer capabilities include:
@@ -568,6 +685,14 @@ Current capabilities include:
 ## Communications
 
 InspectionPress is intended to keep operational communication attached to the correct job, person, and context.
+
+| Channel | Included Workflow |
+| --- | --- |
+| <img alt="Email" src="https://img.shields.io/badge/Email-SES-0284c7?style=flat-square" /> | Transactional email, templates, merge tags, inbound routing, UUID inspection mailboxes, attachments, tracking, and thread linkage. |
+| <img alt="SMS" src="https://img.shields.io/badge/SMS-Twilio-16a34a?style=flat-square" /> | Two-way SMS, automation templates, reminders, confirmations, opt-out handling, suppression, delivery status, and inbound webhooks. |
+| <img alt="Inbox" src="https://img.shields.io/badge/Universal-Inbox-a855f7?style=flat-square" /> | Email/SMS threads tied back to inspections, customers, agents, agencies, follow-up state, and compose workflows. |
+| <img alt="Dialer" src="https://img.shields.io/badge/Browser-Dialer-f97316?style=flat-square" /> | Click-to-call, Twilio browser voice, call logging, dispositions, callbacks, and contact/inspection context. |
+| <img alt="Voice" src="https://img.shields.io/badge/Voice-Agent-ec4899?style=flat-square" /> | Caller lookup, scheduling APIs, quote support, transcripts, call state, human intervention, console push, and summaries. |
 
 ### Email
 
@@ -690,6 +815,13 @@ Voice-agent capabilities include:
 
 ## Billing, Payments, and Compensation
 
+| Money Flow | Included Workflow |
+| --- | --- |
+| <img alt="Invoices" src="https://img.shields.io/badge/Invoices-Billing-0284c7?style=flat-square" /> | Invoice CRUD, line items, PDFs, public pay links, status updates, balance calculation, refunds, and payment history. |
+| <img alt="Payments" src="https://img.shields.io/badge/Payments-Square%20%2B%20Stripe-16a34a?style=flat-square" /> | Square payments/refunds, Stripe PaymentIntent, Checkout, webhook events, gateway selection, and test routes. |
+| <img alt="Agreements" src="https://img.shields.io/badge/Agreements-Signed-f97316?style=flat-square" /> | Agreement signing, public agreement pages, completion status, report delivery gates, and inspection lifecycle integration. |
+| <img alt="Compensation" src="https://img.shields.io/badge/Compensation-Contractors-a855f7?style=flat-square" /> | Contractor pay rules, inspection compensation, quality/corrective events, mileage, approvals, payouts, wallets, and ledgers. |
+
 ### Invoices and Payments
 
 Billing capabilities include:
@@ -754,6 +886,14 @@ Contractor compensation capabilities include:
 ---
 
 ## Property, Permit, Map, Weather, and External Data
+
+| Data Area | Included Workflow |
+| --- | --- |
+| <img alt="Property" src="https://img.shields.io/badge/Property-Records-0284c7?style=flat-square" /> | Address data, owner/contact context, parcel-style fields, property hero images, BuildFax/RentCast refreshes, and overrides. |
+| <img alt="Permits" src="https://img.shields.io/badge/Permits-Intelligence-f97316?style=flat-square" /> | Jurisdictions, scrape sources, permit records, permit inspections, backlog snapshots, utilization reports, evidence images, and import commands. |
+| <img alt="Maps" src="https://img.shields.io/badge/Maps-Google%20%2B%20Apple-16a34a?style=flat-square" /> | Geocoding, address autocomplete, distance calculation, navigation links, public contractor lookup, and map-assisted dispatch. |
+| <img alt="Weather" src="https://img.shields.io/badge/Weather-Documentation-0ea5e9?style=flat-square" /> | Inspection-time weather capture, lockable conditions, report context, and specialty workflow support. |
+| <img alt="Evidence" src="https://img.shields.io/badge/Evidence-Generated%20Images-a855f7?style=flat-square" /> | Permit evidence, ASCE evidence, generated support photos, and report-level attachment behavior. |
 
 ### Properties
 
@@ -837,6 +977,14 @@ Permit capabilities include:
 ---
 
 ## AI, Automation, and Intelligence
+
+| Intelligence Area | Included Workflow |
+| --- | --- |
+| <img alt="AI Writing" src="https://img.shields.io/badge/AI-Report%20Assistance-a855f7?style=flat-square" /> | Drafting, rewriting, analysis helpers, TinyMCE proxy behavior, finding context, and inspector-controlled narrative support. |
+| <img alt="Narratives" src="https://img.shields.io/badge/Narratives-Library-0284c7?style=flat-square" /> | Reusable comments, company-standard wording, tags, categories, reference photos, variants, and fast insertion. |
+| <img alt="Local AI" src="https://img.shields.io/badge/Local%20AI-Bridge-334155?style=flat-square" /> | Read-only snapshots, proxy admin, health checks, saved responses, insight helpers, and data-exclusion rules. |
+| <img alt="Automations" src="https://img.shields.io/badge/Automation-Rules-16a34a?style=flat-square" /> | Lifecycle triggers, conditions, email/SMS actions, retries, suppression, public events, and inspection automation services. |
+| <img alt="Dashboard" src="https://img.shields.io/badge/Dashboard-Analytics-f97316?style=flat-square" /> | Operations pulse, notifications, inbox previews, GA4, Google Ads, predictions, recommendations, and market launch planning. |
 
 ### AI Report Assistance
 
@@ -947,6 +1095,14 @@ Operations and marketing intelligence capabilities include:
 
 InspectionPress includes public-facing website functionality in addition to the authenticated operations app.
 
+| Public Surface | Included Workflow |
+| --- | --- |
+| <img alt="Landing Pages" src="https://img.shields.io/badge/Landing-Pages-0284c7?style=flat-square" /> | Public home, service pages, area pages, live area previews, county/city landing pages, and dynamic public content. |
+| <img alt="Reviews" src="https://img.shields.io/badge/Reviews-Google%20Sync-16a34a?style=flat-square" /> | Public review pages, Google Business Profile sync, location selection, archive imports, public profile tables, and rating fallback. |
+| <img alt="CMS" src="https://img.shields.io/badge/CMS-Pages%20%2B%20Posts-a855f7?style=flat-square" /> | CMS pages, posts, media, tables, redirects, revisions, public route resolving, snapshot import, and legacy content cleanup. |
+| <img alt="SEO" src="https://img.shields.io/badge/SEO-Sitemap%20%2B%20Robots-f97316?style=flat-square" /> | Sitemap generation, robots route, metadata handling, service/area content, and public host access controls. |
+| <img alt="Short Links" src="https://img.shields.io/badge/Short-Links-ec4899?style=flat-square" /> | Branded short links, custom tokens, redirect safety, history, reserved tokens, and report/agreement/payment delivery helpers. |
+
 ### Public Landing Pages
 
 Public website capabilities include:
@@ -1050,6 +1206,14 @@ Short-link capabilities include:
 ---
 
 ## Inspector Portal and Team Operations
+
+| Team Area | Included Workflow |
+| --- | --- |
+| <img alt="Inspector Portal" src="https://img.shields.io/badge/Inspector-Portal-0284c7?style=flat-square" /> | Dashboard, assigned inspections, profile, availability, travel radius, overflow rules, calendar feeds, earnings, and help. |
+| <img alt="Onboarding" src="https://img.shields.io/badge/Onboarding-Inspectors-16a34a?style=flat-square" /> | Public application, resume/document upload, admin review, approval/rejection, password setup, acknowledgements, and sample inspections. |
+| <img alt="Users" src="https://img.shields.io/badge/Users-Permissions-a855f7?style=flat-square" /> | Users, roles, permissions, preferences, company settings, global variables, impersonation, and access control. |
+| <img alt="Support" src="https://img.shields.io/badge/Support-Help%20%2B%20Training-f97316?style=flat-square" /> | Help articles, training modules, feedback, bug reports, attachments, admin notes, page activity, and public staff feed. |
+| <img alt="Assets" src="https://img.shields.io/badge/Assets-Equipment-334155?style=flat-square" /> | Equipment inventory, tool/device fields, assignments, operational accountability, and asset history. |
 
 ### Inspector Portal
 
