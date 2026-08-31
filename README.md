@@ -50,7 +50,7 @@
 
 ## Source Audit Snapshot
 
-This README was expanded from a controller/source audit of the production codebase. The numbers below explain why the feature inventory is long: InspectionPress is not just a report writer, scheduler, CRM, or dialer. It is all of those pieces wired together.
+This README reflects a controller/source audit of the production codebase. The numbers below explain why the feature inventory is long: InspectionPress is not just a report writer, scheduler, CRM, or dialer. It is all of those pieces wired together.
 
 <p align="center">
   <img alt="Controllers" src="https://img.shields.io/badge/Controllers-263-0284c7?style=for-the-badge" />
@@ -68,29 +68,12 @@ This README was expanded from a controller/source audit of the production codeba
 | Migrations | 398 | Shows substantial production evolution, not a thin prototype. |
 | Blade views | 616 | Reflects a large server-rendered UI surface for admins, inspectors, clients, public pages, and specialty editors. |
 
-### Weekend Feature Audit Delta
-
-This pass was expanded from a fresh source snapshot, so the inventory is based on controllers, routes, models, migrations, views, services, frontend files, and public assets rather than commit history.
-
-| Source Area | Previous README Audit | Latest Weekend Audit | Net Change |
-| --- | ---: | ---: | ---: |
-| Controllers | 261 | 263 | +2 |
-| Registered routes | 1,073 | 1,104 | +31 |
-| Models | 225 | 227 | +2 |
-| Migrations | 390 | 398 | +8 |
-| Blade views | 600 | 616 | +16 |
-| App PHP files | 787 | 800 | +13 |
-| Public/storage font files | Not counted | 18 | Newly inventoried |
-
-Weekend additions identified in the audit include the public quote system, client rescheduling and cancellation, agreement versioning, a redesigned client-side inspection experience, improved document uploads and document viewing, custom public font libraries, report lock overrides, and more polished invoice/payment/action flows.
-
 ## README Map
 
 | Looking For | Start With |
 | --- | --- |
 | The basic pitch | [Why This Exists](#why-this-exists) and [What InspectionPress Is](#what-inspectionpress-is) |
 | The fastest feature scan | [Feature Map](#feature-map) |
-| Recently added quote/client/agreement/document/font work | [Recent Feature Additions](#recent-feature-additions) |
 | Specialty inspection tools | [Production Highlights](#production-highlights) |
 | Scheduling, pricing, templates, report writer, and delivery | [Main Product Areas](#main-product-areas) |
 | Customers, agents, agencies, leads, and partner workflows | [CRM and Partner Workflows](#crm-and-partner-workflows) |
@@ -117,20 +100,6 @@ Weekend additions identified in the audit include the public quote system, clien
 | <img alt="AI" src="https://img.shields.io/badge/AI-Automation-a855f7?style=flat-square" /> | AI report assistance, narrative library, serial decoder, OCR/vision fallback, recall checker, AI Assistant analytics, local AI bridge, automation rules, and SMS automation. |
 | <img alt="Public" src="https://img.shields.io/badge/Public-Site-38bdf8?style=flat-square" /> | Service pages, area pages, reviews, sitemap, robots, CMS pages/posts/media/tables, redirects, short links, public report delivery, custom fonts, and secure client access. |
 | <img alt="Admin" src="https://img.shields.io/badge/Admin-Team-334155?style=flat-square" /> | Users, roles, permissions, settings, inspector onboarding, help, training, bug reports, equipment, 404 logs, market launch planning, and operational dashboards. |
-
-## Recent Feature Additions
-
-| Newer Area | What Was Added |
-| --- | --- |
-| <img alt="Quote System" src="https://img.shields.io/badge/Quote-System-22c55e?style=flat-square" /> | Public instant-quote creation, quote records, quote pages, quote PDFs, email/SMS delivery, short links, expiration, renewal, re-send cooldowns, and quote-to-schedule conversion. |
-| <img alt="Client Rescheduling" src="https://img.shields.io/badge/Client-Rescheduling-0284c7?style=flat-square" /> | Public reschedule calendar, payment-aware premium-time handling, temporary slot holds, pending payment redirects, expired-intent cleanup, and immediate same-price/cheaper paid moves. |
-| <img alt="Client Cancellation" src="https://img.shields.io/badge/Client-Cancellation-f97316?style=flat-square" /> | Client-initiated cancellation with payment and short-notice guardrails, cancellation reasons, inspector/calendar cleanup, and pending cancellation automation for unpaid reservations. |
-| <img alt="Agreement Versions" src="https://img.shields.io/badge/Agreement-Versioning-a855f7?style=flat-square" /> | Versioned inspection agreements, signed snapshots, pricing totals, manual version creation, void/unvoid/trash controls, and automatic regeneration after pricing/service changes. |
-| <img alt="Client UI" src="https://img.shields.io/badge/Client-UI-0ea5e9?style=flat-square" /> | Redesigned public inspection pages with action navigation, clearer required-step states, payment/agreement/reschedule/cancel messaging, and mobile header/menu refinements. |
-| <img alt="Documents" src="https://img.shields.io/badge/Documents-Uploads-ec4899?style=flat-square" /> | Better client/admin document uploads, client display descriptions, hide-from-client controls, safe preview/download behavior, linked email attachments, and document viewer modal actions. |
-| <img alt="Fonts" src="https://img.shields.io/badge/Fonts-Branding-14b8a6?style=flat-square" /> | Custom font library for public pages with WOFF2/WOFF/TTF/OTF uploads, active font selection, target groups, optional custom selectors, and preload-backed public font rendering. |
-| <img alt="Report Locks" src="https://img.shields.io/badge/Reports-Lock%20Overrides-eab308?style=flat-square" /> | Manual report lock, unlock, and automatic modes so admins can explicitly block or release public report access when billing/agreement state changes. |
-| <img alt="Analytics" src="https://img.shields.io/badge/Analytics-Conversions-334155?style=flat-square" /> | Quote and payment conversion instrumentation for quote creation, step viewing, scheduled quote conversion, and successful public payments. |
 
 ---
 
@@ -390,7 +359,7 @@ Scheduling capabilities include:
 - Travel estimate support for arrival status
 - Automatic overdue-finished command for inspections that pass their scheduled end
 
-Weekend quote and client-action additions include:
+Quote, rescheduling, and client-action capabilities include:
 
 - Public quote mode built on the same scheduling foundation as normal public booking
 - Quote records saved as unconfirmed inspections with client, property, service, county, duration, pricing, discount, and quote-source context
@@ -444,7 +413,7 @@ Inspection capabilities include:
 - Public/client-facing inspection detail page
 - Public reschedule, cancellation, agent attachment, document upload, and service update flows
 
-Weekend inspection-record additions include:
+Document and evidence-record capabilities include:
 
 - Improved client document upload handling with a shared inspection document service
 - 50 MB public document upload limit for supported inspection-document types
@@ -1489,7 +1458,7 @@ Current source-backed pieces include:
 - PWA date-range metadata endpoint
 - API sync endpoint for finding payloads
 - Dexie dependency for browser-side storage
-- Mobile report writer endpoints for sections, components, findings, edits, saves, and additions
+- Mobile report writer endpoints for sections, components, findings, edits, saves, and new content
 - Mobile-friendly specialty editor direction
 
 The offline/PWA surface is an active development area. Treat it as a direction and infrastructure layer unless your fork has tested the exact offline behavior you intend to rely on.
