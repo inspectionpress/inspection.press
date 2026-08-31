@@ -53,20 +53,36 @@
 This README was expanded from a controller/source audit of the production codebase. The numbers below explain why the feature inventory is long: InspectionPress is not just a report writer, scheduler, CRM, or dialer. It is all of those pieces wired together.
 
 <p align="center">
-  <img alt="Controllers" src="https://img.shields.io/badge/Controllers-261-0284c7?style=for-the-badge" />
-  <img alt="Routes" src="https://img.shields.io/badge/Routes-1%2C073-16a34a?style=for-the-badge" />
-  <img alt="Models" src="https://img.shields.io/badge/Models-225-f97316?style=for-the-badge" />
-  <img alt="Migrations" src="https://img.shields.io/badge/Migrations-390-a855f7?style=for-the-badge" />
-  <img alt="Blade Views" src="https://img.shields.io/badge/Blade%20Views-600-ec4899?style=for-the-badge" />
+  <img alt="Controllers" src="https://img.shields.io/badge/Controllers-263-0284c7?style=for-the-badge" />
+  <img alt="Routes" src="https://img.shields.io/badge/Routes-1%2C104-16a34a?style=for-the-badge" />
+  <img alt="Models" src="https://img.shields.io/badge/Models-227-f97316?style=for-the-badge" />
+  <img alt="Migrations" src="https://img.shields.io/badge/Migrations-398-a855f7?style=for-the-badge" />
+  <img alt="Blade Views" src="https://img.shields.io/badge/Blade%20Views-616-ec4899?style=for-the-badge" />
 </p>
 
 | Source Area | Audited Count | Why It Matters |
 | --- | ---: | --- |
-| Controllers | 261 | Shows the breadth of admin, public, inspector, API, billing, communication, specialty report, and integration workflows. |
-| Routes | 1,073 | Reflects a mature app surface across admin tools, public booking, report delivery, APIs, webhooks, and field workflows. |
-| Models | 225 | Represents the operational data model behind inspections, reports, CRM, billing, communications, permits, marketing, and AI tooling. |
-| Migrations | 390 | Shows substantial production evolution, not a thin prototype. |
-| Blade views | 600 | Reflects a large server-rendered UI surface for admins, inspectors, clients, public pages, and specialty editors. |
+| Controllers | 263 | Shows the breadth of admin, public, inspector, API, billing, communication, specialty report, and integration workflows. |
+| Routes | 1,104 | Reflects a mature app surface across admin tools, public booking, quote delivery, report delivery, APIs, webhooks, and field workflows. |
+| Models | 227 | Represents the operational data model behind inspections, reports, CRM, billing, communications, permits, marketing, and AI tooling. |
+| Migrations | 398 | Shows substantial production evolution, not a thin prototype. |
+| Blade views | 616 | Reflects a large server-rendered UI surface for admins, inspectors, clients, public pages, and specialty editors. |
+
+### Weekend Feature Audit Delta
+
+This pass was expanded from a fresh source snapshot, so the inventory is based on controllers, routes, models, migrations, views, services, frontend files, and public assets rather than commit history.
+
+| Source Area | Previous README Audit | Latest Weekend Audit | Net Change |
+| --- | ---: | ---: | ---: |
+| Controllers | 261 | 263 | +2 |
+| Registered routes | 1,073 | 1,104 | +31 |
+| Models | 225 | 227 | +2 |
+| Migrations | 390 | 398 | +8 |
+| Blade views | 600 | 616 | +16 |
+| App PHP files | 787 | 800 | +13 |
+| Public/storage font files | Not counted | 18 | Newly inventoried |
+
+Weekend additions identified in the audit include the public quote system, client rescheduling and cancellation, agreement versioning, a redesigned client-side inspection experience, improved document uploads and document viewing, custom public font libraries, report lock overrides, and more polished invoice/payment/action flows.
 
 ## README Map
 
@@ -74,6 +90,7 @@ This README was expanded from a controller/source audit of the production codeba
 | --- | --- |
 | The basic pitch | [Why This Exists](#why-this-exists) and [What InspectionPress Is](#what-inspectionpress-is) |
 | The fastest feature scan | [Feature Map](#feature-map) |
+| Recently added quote/client/agreement/document/font work | [Recent Feature Additions](#recent-feature-additions) |
 | Specialty inspection tools | [Production Highlights](#production-highlights) |
 | Scheduling, pricing, templates, report writer, and delivery | [Main Product Areas](#main-product-areas) |
 | Customers, agents, agencies, leads, and partner workflows | [CRM and Partner Workflows](#crm-and-partner-workflows) |
@@ -89,15 +106,31 @@ This README was expanded from a controller/source audit of the production codeba
 | Area | Highlights |
 | --- | --- |
 | <img alt="Scheduling" src="https://img.shields.io/badge/Scheduling-Dispatch-0284c7?style=flat-square" /> | Public scheduler, admin booking, inspector matching, service areas, zones, availability, rescheduling, cancellation, arrival status, and calendar flows. |
+| <img alt="Quotes" src="https://img.shields.io/badge/Quotes-Booking%20Flow-22c55e?style=flat-square" /> | Instant quote creation, quote PDFs, email/SMS quote delivery, short links, expiration/renewal, resend cooldowns, and quote-to-schedule conversion. |
 | <img alt="Reports" src="https://img.shields.io/badge/Reports-Media-16a34a?style=flat-square" /> | Multi-report inspections, templates, sections, components, findings, summaries, PDFs, photos, videos, 360 media, annotations, captions, and ZIP downloads. |
 | <img alt="Specialty" src="https://img.shields.io/badge/Specialty-Forms-f97316?style=flat-square" /> | Four Point, Roof Certification, legacy Wind Mitigation, Wind Mitigation 2026, pre-acquisition reports, ASCE evidence, signatures, and high-fidelity SVG/PDF output. |
 | <img alt="CRM" src="https://img.shields.io/badge/CRM-Partners-ec4899?style=flat-square" /> | Customers, agents, agencies, unconfirmed agencies, partner programs, leads, tags, imports, merge flows, communication history, and activity timelines. |
 | <img alt="Comms" src="https://img.shields.io/badge/Comms-Inbox-7c3aed?style=flat-square" /> | SES email, inbound email routing, UUID-linked inspection communication, SMS, templates, merge tags, universal inbox, browser dialer, calls, dispositions, and Twilio webhooks. |
-| <img alt="Billing" src="https://img.shields.io/badge/Billing-Payments-eab308?style=flat-square" /> | Invoices, line items, public payment pages, Square, Stripe, refunds, payment state, agreements, contractor compensation, wallets, mileage, payouts, and Stripe Connect. |
+| <img alt="Billing" src="https://img.shields.io/badge/Billing-Payments-eab308?style=flat-square" /> | Invoices, line items, public payment pages, Square, Stripe, refunds, payment state, agreement versions, contractor compensation, wallets, mileage, payouts, and Stripe Connect. |
+| <img alt="Client" src="https://img.shields.io/badge/Client-Portal-0ea5e9?style=flat-square" /> | Redesigned public inspection pages, client document upload, document viewer modal, signed agreement viewer/PDF, action status messaging, and no-login secure access. |
 | <img alt="Property" src="https://img.shields.io/badge/Property-Data-14b8a6?style=flat-square" /> | Property records, BuildFax, RentCast, permits, weather, Google Maps/Places, distance calculations, Apple Maps links, generated evidence, and contractor lookup. |
 | <img alt="AI" src="https://img.shields.io/badge/AI-Automation-a855f7?style=flat-square" /> | AI report assistance, narrative library, serial decoder, OCR/vision fallback, recall checker, AI Assistant analytics, local AI bridge, automation rules, and SMS automation. |
-| <img alt="Public" src="https://img.shields.io/badge/Public-Site-0ea5e9?style=flat-square" /> | Service pages, area pages, reviews, sitemap, robots, CMS pages/posts/media/tables, redirects, short links, public report delivery, and secure client access. |
+| <img alt="Public" src="https://img.shields.io/badge/Public-Site-38bdf8?style=flat-square" /> | Service pages, area pages, reviews, sitemap, robots, CMS pages/posts/media/tables, redirects, short links, public report delivery, custom fonts, and secure client access. |
 | <img alt="Admin" src="https://img.shields.io/badge/Admin-Team-334155?style=flat-square" /> | Users, roles, permissions, settings, inspector onboarding, help, training, bug reports, equipment, 404 logs, market launch planning, and operational dashboards. |
+
+## Recent Feature Additions
+
+| Newer Area | What Was Added |
+| --- | --- |
+| <img alt="Quote System" src="https://img.shields.io/badge/Quote-System-22c55e?style=flat-square" /> | Public instant-quote creation, quote records, quote pages, quote PDFs, email/SMS delivery, short links, expiration, renewal, re-send cooldowns, and quote-to-schedule conversion. |
+| <img alt="Client Rescheduling" src="https://img.shields.io/badge/Client-Rescheduling-0284c7?style=flat-square" /> | Public reschedule calendar, payment-aware premium-time handling, temporary slot holds, pending payment redirects, expired-intent cleanup, and immediate same-price/cheaper paid moves. |
+| <img alt="Client Cancellation" src="https://img.shields.io/badge/Client-Cancellation-f97316?style=flat-square" /> | Client-initiated cancellation with payment and short-notice guardrails, cancellation reasons, inspector/calendar cleanup, and pending cancellation automation for unpaid reservations. |
+| <img alt="Agreement Versions" src="https://img.shields.io/badge/Agreement-Versioning-a855f7?style=flat-square" /> | Versioned inspection agreements, signed snapshots, pricing totals, manual version creation, void/unvoid/trash controls, and automatic regeneration after pricing/service changes. |
+| <img alt="Client UI" src="https://img.shields.io/badge/Client-UI-0ea5e9?style=flat-square" /> | Redesigned public inspection pages with action navigation, clearer required-step states, payment/agreement/reschedule/cancel messaging, and mobile header/menu refinements. |
+| <img alt="Documents" src="https://img.shields.io/badge/Documents-Uploads-ec4899?style=flat-square" /> | Better client/admin document uploads, client display descriptions, hide-from-client controls, safe preview/download behavior, linked email attachments, and document viewer modal actions. |
+| <img alt="Fonts" src="https://img.shields.io/badge/Fonts-Branding-14b8a6?style=flat-square" /> | Custom font library for public pages with WOFF2/WOFF/TTF/OTF uploads, active font selection, target groups, optional custom selectors, and preload-backed public font rendering. |
+| <img alt="Report Locks" src="https://img.shields.io/badge/Reports-Lock%20Overrides-eab308?style=flat-square" /> | Manual report lock, unlock, and automatic modes so admins can explicitly block or release public report access when billing/agreement state changes. |
+| <img alt="Analytics" src="https://img.shields.io/badge/Analytics-Conversions-334155?style=flat-square" /> | Quote and payment conversion instrumentation for quote creation, step viewing, scheduled quote conversion, and successful public payments. |
 
 ---
 
@@ -162,10 +195,12 @@ InspectionPress can support:
 Core capabilities include:
 
 - **Scheduling and availability** with public and admin workflows
+- **Public quote system** with quote pages, PDFs, email/SMS delivery, expiration, renewal, and schedule conversion
+- **Client self-service** for rescheduling, cancellation, document upload, agent attachment, service changes, payment, and agreement signing
 - **Inspector matching** by service, service area, zone, county, ZIP, distance, and active status
 - **Service catalogs** with public visibility, service categories, report writer keys, and agency-specific offerings
 - **Dynamic pricing** with base prices, service-specific pricing, agency overrides, distance, property size, property age, custom fees, and premium-time surcharges
-- **Invoices, payments, and agreements** with Square and Stripe support
+- **Invoices, payments, and versioned agreements** with Square and Stripe support
 - **Report templates** with sections, components, findings, required/optional content, default findings, ordering, and import tooling
 - **Multi-report inspections** with report instances, specialty writers, duplicate/rename/reorder/restore behavior, and independent publish status
 - **Report writing** with findings, rich text, media, severity, recommendations, location tags, AI assistance, recall support, and public/PDF output
@@ -175,6 +210,7 @@ Core capabilities include:
 - **Voice agent support** for caller context, service matching, quote support, scheduling, human intervention, and transcript summaries
 - **Property intelligence** through BuildFax, RentCast, Google geocoding/maps, weather, permits, and public contractor lookup
 - **Public website tooling** for landing pages, service pages, public area pages, CMS pages/posts/tables, reviews, sitemap, and robots
+- **Public typography controls** with uploadable font libraries and admin-selected target areas
 - **Marketing intelligence** with GA4, Google Ads sync, attribution, recommendations, predictions, and forensic exports
 - **Admin operations** for users, roles, permissions, announcements, help center, training, bug reports, market launches, 404 logs, and settings
 
@@ -186,6 +222,8 @@ InspectionPress is broader than any single module, but several production workfl
 
 | Highlight | What It Covers |
 | --- | --- |
+| <img alt="Quote System" src="https://img.shields.io/badge/Quote-System-22c55e?style=flat-square" /> | Public quote intake, durable quote records, PDFs, email/SMS delivery, expiration, renewal, short links, analytics, and quote-to-schedule booking. |
+| <img alt="Client Self Service" src="https://img.shields.io/badge/Client-Self--Service-0ea5e9?style=flat-square" /> | Redesigned client inspection page, reschedule/cancel actions, document uploads, payment prompts, agreement signing, signed documents, and status messaging. |
 | <img alt="Wind 2026" src="https://img.shields.io/badge/Wind-2026-0284c7?style=flat-square" /> | OIR-B1-1802 editor, ASCE evidence, mapped fields, SVG/PDF output, signatures, and photo pages. |
 | <img alt="Four Point" src="https://img.shields.io/badge/Four-Point-f97316?style=flat-square" /> | Roof, electrical, plumbing, HVAC, photo pages, SVG preview, PDF output, and report-instance support. |
 | <img alt="Roof" src="https://img.shields.io/badge/Roof-Certification-16a34a?style=flat-square" /> | Focused roof documentation, signatures, photo pages, public PDF delivery, and carrier-style output. |
@@ -352,6 +390,30 @@ Scheduling capabilities include:
 - Travel estimate support for arrival status
 - Automatic overdue-finished command for inspections that pass their scheduled end
 
+Weekend quote and client-action additions include:
+
+- Public quote mode built on the same scheduling foundation as normal public booking
+- Quote records saved as unconfirmed inspections with client, property, service, county, duration, pricing, discount, and quote-source context
+- Quote descriptions on services so the public quote page can explain what the customer is buying
+- Duplicate-submit protection through durable scheduler draft tokens
+- Quote expiration and historical quote renewal
+- Previous/replacement quote chaining when an expired quote is regenerated
+- Public quote page with hero image support from inspection hero, property hero, or map imagery
+- Quote PDF generation for download and email attachment
+- Email and SMS quote delivery with short-link support
+- Client quote re-send controls with daily email/SMS cooldowns and admin bypass
+- Quote-to-schedule path that keeps the quoted property, customer, services, and price while asking only for appointment time
+- GA4-style quote conversion instrumentation for `quote_step_view` and `quote_created`
+- Payment-aware client rescheduling from the public inspection page
+- Reschedule calendar mode that preserves the original inspection context while recalculating available times
+- Premium-time handling during reschedules, including invoice updates before payment and premium-difference collection after payment
+- Pending reschedule intents that temporarily reserve a selected slot while payment is in progress
+- Automatic cleanup for expired reschedule payment holds
+- Same-price or cheaper paid reschedules that move immediately while preserving the already-paid invoice total
+- Client cancellation guardrails that prevent online cancellation after payment or inside the configured short-notice window
+- Cancellation cleanup for assigned inspectors, previous inspector tracking, and external calendar events
+- Pending cancellation automation that can release a calendar slot while waiting on payment, restore it after payment, or cancel it when the deadline/conflict rules require it
+
 ### Inspection Records
 
 Inspection records are the operational center of the platform.
@@ -381,6 +443,20 @@ Inspection capabilities include:
 - Photos ZIP download
 - Public/client-facing inspection detail page
 - Public reschedule, cancellation, agent attachment, document upload, and service update flows
+
+Weekend inspection-record additions include:
+
+- Improved client document upload handling with a shared inspection document service
+- 50 MB public document upload limit for supported inspection-document types
+- Expanded file support for images, PDFs, office documents, spreadsheets, text files, video files, archives, HTML, and web archives
+- Client-facing document descriptions for cleaner labels in the public inspection view
+- Per-document client visibility control through a hide-from-client flag
+- Streamed document responses with inline preview for safe previewable formats and forced download for higher-risk formats
+- SVG sandboxing and `nosniff` headers for safer document serving
+- Admin document upload, preview, and delete routes tied directly to the inspection record
+- Email attachment viewing through the same document response layer where attachments are linked back to an inspection
+- Public document access checks that verify inspection ownership and hide private/internal documents
+- Better mirroring of uploaded supporting documents into permit and report evidence contexts when appropriate
 
 ### Services, Categories, Areas, Zones, and Pricing
 
@@ -456,6 +532,10 @@ Report-instance capabilities include:
 - Track individual report publish status
 - Deliver individual reports through secure UUID routes
 - Public report view tracking for clients and agents
+- Manual report lock, unlock, and automatic-locking modes
+- Admin report lock controls that can explicitly block or release a published report
+- Public/client delivery logic that honors manual report locks before payment and agreement gates
+- Manual unlock support for already-delivered reports when a later service or invoice change creates a new balance
 
 ### Standard Report Writer
 
@@ -561,6 +641,14 @@ Delivery capabilities include:
 - Report view tracking
 - Client/public inspection detail pages
 - Agreement and payment status gating patterns
+- Redesigned client-side inspection page with clearer action areas for pay, sign, reschedule, cancel, upload, and view documents
+- Public action navigation that surfaces required next steps without requiring a login
+- Client status messaging for payment, agreement, pending reschedule, cancellation, and delivery states
+- Public document viewer modal with loading, error, preview, download, print, share, and pay actions
+- Dedicated signed-agreement viewer and signed-agreement PDF output
+- Invoice/agreement viewing improvements from the public inspection page
+- Automatic payment modal launch for pending reschedule payment links
+- Mobile header/menu refinements for client-facing inspection views
 
 ---
 
@@ -843,6 +931,11 @@ Billing capabilities include:
 - Gateway resolver for Square/Stripe/default behavior
 - Invoice balance summary, total, paid, balance due, and status logic
 - Weekly lead invoice command for agencies that bill weekly
+- Invoice balance checks reused by public report delivery, pending cancellation, and client reschedule payment flows
+- Premium-time invoice line management for unpaid and paid reschedule scenarios
+- Public payment modal support from the redesigned client inspection page
+- Stripe and Square payment status messaging inside client-facing action flows
+- Purchase/conversion tracking after successful public payment
 
 ### Agreements
 
@@ -854,6 +947,16 @@ Agreement capabilities include:
 - Public/admin agreement signing routes
 - Agreement sent/signed automation events
 - Payment/agreement gating patterns for delivery flows
+- Multiple agreement records per inspection/service agreement relationship
+- Version numbers for inspection agreements
+- Stable signed-agreement document snapshots generated from merge fields
+- Pricing totals saved to agreement records for historical context
+- Automatic agreement lifecycle handling after pricing or service changes
+- Signed current agreements can be voided when pricing changes and replaced with a fresh version
+- Unsigned outdated agreements can be retired or moved aside without blocking the current agreement
+- Manual new-version creation from the admin inspection screen
+- Admin controls for viewing a specific version, downloading a specific version, voiding, unvoiding, and trashing agreement records
+- Public signed-agreement document and PDF routes that can render the authoritative version or a specific historical version
 
 ### Contractor Compensation
 
@@ -1102,6 +1205,7 @@ InspectionPress includes public-facing website functionality in addition to the 
 | <img alt="CMS" src="https://img.shields.io/badge/CMS-Pages%20%2B%20Posts-a855f7?style=flat-square" /> | CMS pages, posts, media, tables, redirects, revisions, public route resolving, snapshot import, and legacy content cleanup. |
 | <img alt="SEO" src="https://img.shields.io/badge/SEO-Sitemap%20%2B%20Robots-f97316?style=flat-square" /> | Sitemap generation, robots route, metadata handling, service/area content, and public host access controls. |
 | <img alt="Short Links" src="https://img.shields.io/badge/Short-Links-ec4899?style=flat-square" /> | Branded short links, custom tokens, redirect safety, history, reserved tokens, and report/agreement/payment delivery helpers. |
+| <img alt="Fonts" src="https://img.shields.io/badge/Fonts-Public%20Branding-22c55e?style=flat-square" /> | Upload custom font files, activate one public font, target headings/navigation/buttons/labels/body copy, and preload fonts for client-facing pages. |
 
 ### Public Landing Pages
 
@@ -1120,6 +1224,10 @@ Public website capabilities include:
 - Public robots.txt
 - Static pages such as terms of use and standards of practice
 - Buy-back guarantee static page
+- Custom public font loading through a shared public partial
+- Font preloading before page paint to reduce visible fallback-font swapping
+- Admin-selected font targets for headings, navigation, buttons, labels, and body copy
+- Optional admin-entered CSS selectors with validation and safe per-selector output
 
 Public service page definitions currently include:
 
@@ -1278,6 +1386,11 @@ Admin/team capabilities include:
 - Active/inactive admin and inspector flags
 - Public staff feed visibility rules
 - Public inspector feed token support
+- Admin custom font library
+- WOFF2, WOFF, TTF, and OTF font uploads
+- Active public font selection
+- Public font target settings for headings, navigation, buttons, labels, and body copy
+- Custom selector settings for advanced public typography control
 
 ### Help, Training, Feedback, and Bugs
 
@@ -1417,11 +1530,13 @@ The offline/PWA surface is an active development area. Treat it as a direction a
 
 ## Controller-Derived Module Map
 
-The audited source contains 261 controller files, 1,073 registered routes, 225 models, 390 migrations, 600 Blade views, and 787 PHP app files. The table below groups the controller surface by product area.
+The audited source contains 263 controller files, 1,104 registered routes, 227 models, 398 migrations, 616 Blade views, and 800 PHP app files. The table below groups the controller surface by product area.
 
 | Area | Main controllers/services | What it owns |
 | --- | --- | --- |
 | Inspections | `Admin/InspectionController`, `PublicInspectionController`, `Inspector/InspectionController`, `Pwa/PwaInspectionController` | Admin jobs, public scheduling, client detail pages, inspector job views, unconfirmed requests, people/services, reschedule/cancel, notes, documents, photos, and PWA inspection lists |
+| Quotes | `QuoteController`, `QuoteDeliveryService`, `PricingService`, `OnlineBookingDiscountService`, `ShortLinkService` | Instant quote creation, quote records, quote PDFs, email/SMS delivery, short links, expiration, renewal, resend cooldowns, and quote-to-schedule conversion |
+| Client portal/actions | `PublicInspectionController`, `ClientPortalController`, `Client/PublicReportController`, `InspectionRescheduleService`, `InspectionCancellationService`, `PendingCancellationService`, `InspectionDocumentService` | No-login inspection pages, client document upload, document preview/download, reschedule calendar, cancellation requests, pending reschedule payments, pending cancellation handling, service updates, and public action/status messaging |
 | Reports | `Admin/ReportController`, `PublicReportController`, `Client/PublicReportController`, `Api/SyncFindingsController` | Report instances, default writer, mobile writer endpoints, publish/delivery, public assets, PDFs, ZIP exports, autosave, and sync |
 | Specialty reports | `FourPointController`, `WindMitigationController`, `WindMitigation2026Controller`, `RoofCertificationController`, `PreAcquisitionReportController` | Florida insurance forms, specialty schemas, SVG/PDF rendering, photo pages, signatures, ASCE evidence, and specialty viewers |
 | Report media | `FindingPhotoController`, `FindingVideoDirectUploadController`, `Finding360Controller`, `SectionPhotoEditorController`, `BulkPhotoCopyController`, `FindingPhotoCopyController`, `SectionPhotoCopyController`, `InspectionCyaPhotoController`, `InspectionHeroController` | Uploads, thumbnails, annotations, captions, reverts, 360 photos, videos, CYA photos, hero images, and copy flows |
@@ -1432,11 +1547,12 @@ The audited source contains 261 controller files, 1,073 registered routes, 225 m
 | Communications | `InboxController`, `InspectionEmailController`, `InboundEmailController`, `EmailController`, `EmailTemplateController`, `SmsController`, `SmsAutomationController`, `TwilioController`, `DialerController`, `CallController`, `CallDispositionController` | Inbox threads, compose/send, inbound email, templates, SMS, automation events, Twilio webhooks, browser dialer, calls, and dispositions |
 | Voice agent | `Api/VoiceAgent*`, `Admin/Voice*`, `TwilioBrowserVoiceController`, `VoiceConsolePushController` | Caller lookup, scheduling APIs, transcripts, call state, human intervention, browser barge/hold/hangup, push, and call summaries |
 | Billing/payments | `InvoiceController`, `PublicInvoiceController`, `Billing/StripeInvoicePaymentController`, `Billing/StripeWebhookController` | Invoices, line items, public/admin pay flows, Square, Stripe, webhooks, refunds, and payment state |
+| Agreement lifecycle | `AgreementController`, `InspectionAgreementController`, `InspectionAgreementLifecycleService`, `VariableReplacer`, `PdfImageLocalizer` | Agreement templates, current/historical inspection agreement versions, signature capture, signed snapshots, void/unvoid/trash controls, pricing-change regeneration, and signed-agreement PDFs |
 | Compensation | `InspectionCompensationController`, `ContractorCompensationRuleController`, `ContractorEarningsController`, `ContractorMileageController`, `ContractorPayoutController`, `UserStripeLedgerController` | Contractor pay rules, compensation lines, quality/corrective events, mileage, payouts, Stripe Connect, wallets, and ledgers |
 | Property/data | `PropertyController`, `BuildFaxLookupController`, `RentCastLookupController`, `InspectionPermitController`, `PermitIntelligenceController`, `PermitBacklogDashboardController`, `PermitRecordExplorerController` | Property records, BuildFax, RentCast, permits, generated evidence, permit backlog, and jurisdiction intelligence |
 | AI/content intelligence | `FindingAiAnalysisController`, `TinyMceChatGptProxyController`, `SerialDecoderController`, `RecallCheckerController`, `LocalAiIntelligenceController`, `AiAgentKnowledgeController` | AI finding analysis, AI text assistance, serial decoding, OCR/vision, recall lookup/pinning, local AI bridge, and voice-agent knowledge |
 | Templates/narratives | `Template*Controller`, `NarrativeLibraryController`, `RecommendationController`, `RecommendationPlaceMapController`, `FindingRecommendationController` | Template structure, imports, narrative library, reference photos, recommendation library, and Google Places mappings |
-| Public website/CMS | `PublicLandingPageController`, `Public/AreaPageController`, `Public/LiveAreaPageController`, `Public/CmsPublicController`, `Admin/Cms/*`, `PublicSitemapController`, `PublicRobotsController`, `GoogleReviewsController` | Public pages, service/area pages, CMS migration, CMS tables, reviews, sitemap, robots, public areas, and SEO metadata |
+| Public website/CMS | `PublicLandingPageController`, `Public/AreaPageController`, `Public/LiveAreaPageController`, `Public/CmsPublicController`, `Admin/Cms/*`, `FontLibraryController`, `PublicSitemapController`, `PublicRobotsController`, `GoogleReviewsController` | Public pages, service/area pages, CMS migration, CMS tables, reviews, sitemap, robots, public areas, SEO metadata, and public custom font presentation |
 | Analytics/marketing | `DashboardController`, analytics controllers, `GoogleAdsController`, `GoogleAdsBottleneckController`, `MarketLaunchController`, `MarketLaunchTaskController` | Admin dashboard, AI Assistant analytics, GA4, Google Ads sync/insights, predictions, recommendations, market launch planning, and operational pulse |
 | Admin/security/support | `UserController`, `UserManagementController`, `RoleController`, `PermissionController`, `SettingsController`, `CompanySettingsController`, `Help*Controller`, `TrainingModuleController`, `BugReportController`, `EquipmentController`, `NotFoundRequestController` | Users, roles, permissions, settings, company config, help/training, bugs, equipment, 404 logs, and internal operations |
 | Auth/calendar/integrations | `Auth/*`, `CalendarController`, `CalendarFeedController`, `CalendarIcalController`, `OutlookController`, `Inspector/CalendarConnectorController` | Login/password/email verification, inspector password setup, calendar feeds, external calendar connectors, and Outlook/Graph flows |
@@ -1451,12 +1567,13 @@ The schema is broad. Important durable concepts include:
 | Data area | Representative models/tables |
 | --- | --- |
 | Core jobs | `Inspection`, `Property`, `InspectionCustomItem`, `InspectionNote`, `InspectionArrivalEvent` |
+| Quotes and client scheduling actions | Quote fields on `Inspection`, `InspectionRescheduleIntent`, pending cancellation fields, scheduler draft tokens, quote expiration/replacement fields |
 | People/CRM | `Customer`, `Agent`, `Agency`, `Client`, `Tag`, pivots for customers/agents/inspectors |
 | Services/pricing | `Service`, `ServiceCategory`, `ServiceArea`, `Zone`, `ServicePricing`, `ServiceModifier`, `PremiumRule` |
 | Reports | `InspectionReport`, `Section`, `Component`, `InspectionReportFinding`, `InspectionReportPhoto`, `InspectionReportPinnedFinding` |
 | Templates | `Template`, `TemplateSection`, `TemplateComponent`, `TemplateFinding` |
 | Specialty photos | `FourPoint`, `FourPointPhoto`, `InspectionCyaPhoto`, `ReinspectionFinding`, `ReinspectionPhoto` |
-| Documents/agreements | `Document`, `Agreement`, `InspectionAgreement` |
+| Documents/agreements | `Document` with description/client visibility fields, `Agreement`, versioned `InspectionAgreement` records with UUIDs, pricing totals, void state, and soft deletes |
 | Billing | `Invoice`, `InvoiceItem`, `Payment`, `StripeWebhookEvent` |
 | Compensation | `InspectionCompensation`, `InspectionCompensationLine`, `ContractorPayout`, `ContractorWallet`, `ContractorWithdrawal`, `ContractorMileageEntry` |
 | Communications | `Email`, `EmailAttachment`, `EmailSend`, `Message`, `Call`, `CallDisposition`, `InboxFlag`, `SmsSuppression`, `SmsMessageTemplate` |
@@ -1466,6 +1583,7 @@ The schema is broad. Important durable concepts include:
 | Public site/CMS | `LandingPage`, `PublicCounty`, `PublicCity`, `PublicReview`, `CmsPage`, `CmsPost`, `CmsMedia`, `CmsTable` |
 | AI/reference data | `AiAgentKnowledge`, `NarrativeLibrary`, `SerialDecoderRule`, `SerialDecoderSource`, `Manufacturer`, `Brand`, `ApplianceType` |
 | Marketing | `GoogleAdsAttribution`, `GoogleAdsDailyMetric`, `GoogleAdsSearchTerm`, `GoogleAdsInsight`, `GoogleAdsRecommendation`, analytics snapshots |
+| Public branding | `CustomFont`, font-target settings, active public font setting, custom public selector settings |
 
 ---
 
